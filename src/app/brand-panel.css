@@ -6,14 +6,14 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 18px;
   height: 100%;
-  min-height: 520px;
-  padding: 30px;
+  min-height: 560px;
+  padding: 26px 28px 30px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 72% 30%, #b8f1ff 0 6%, #3fd8ff55 14%, transparent 34%),
-    linear-gradient(160deg, #1452ff 0%, #0a2690 45%, #041244 100%);
+    radial-gradient(circle at 50% 36%, #3fd8ff33, transparent 42%),
+    linear-gradient(160deg, #1452ff 0%, #0a2690 42%, #041244 100%);
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%);
 }
 .about-art::before {
@@ -21,17 +21,25 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(-24deg, transparent 58%, #3fd8ff44 58% 61%, transparent 61%),
-    linear-gradient(-24deg, transparent 68%, #f2f9ff33 68% 69%, transparent 69%),
-    repeating-linear-gradient(transparent 0 22px, #b8f1ff0d 22px 23px);
+    linear-gradient(-24deg, transparent 63%, #3fd8ff33 63% 65%, transparent 65%),
+    linear-gradient(-24deg, transparent 71%, #f2f9ff22 71% 71.6%, transparent 71.6%),
+    repeating-linear-gradient(transparent 0 22px, #b8f1ff0b 22px 23px);
   pointer-events: none;
 }
 .about-art > * {
   position: relative;
   z-index: 1;
 }
+
+/* top row */
+.panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 .eyebrow {
-  align-self: flex-start;
   padding: 3px 12px;
   background: #020b2e;
   color: #3fd8ff;
@@ -40,24 +48,104 @@
   text-transform: uppercase;
   transform: skewX(-12deg);
 }
-.monogram-art {
-  display: flex;
-  flex-direction: column;
+.clock {
+  display: inline-flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px 0;
+  gap: 8px;
+  font: italic 700 14px var(--ui);
+  letter-spacing: 0.14em;
+  color: #b8f1ff;
 }
-.monogram-art img {
-  width: min(70%, 270px);
+.clock i {
+  width: 7px;
+  height: 7px;
+  background: #3fd8ff;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px #3fd8ff;
+  animation: blink 2s steps(2, jump-none) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* emblem */
+.emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.emblem > * {
+  grid-area: 1 / 1;
+}
+.glow {
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 38%, #ffffff 0 10%, #b8f1ff 26%, #3fd8ff 48%, #1452ff00 72%);
+  opacity: 0.5;
+  filter: blur(2px);
+}
+.ring {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+.ring-ticks {
+  background: repeating-conic-gradient(#b8f1ffaa 0 0.6deg, transparent 0.6deg 6deg);
+  mask: radial-gradient(circle, transparent 66%, #000 66.5% 70%, transparent 70.5%);
+  animation: spin 90s linear infinite;
+}
+.ring-dash {
+  width: 82%;
+  border: 2px dashed #3fd8ff99;
+  animation: spin 40s linear infinite reverse;
+}
+.ring-orbit {
+  position: relative;
+  width: 94%;
+  border: 1px solid #3fd8ff44;
+  animation: spin 16s linear infinite;
+}
+.ring-orbit b {
+  position: absolute;
+  top: -6px;
+  left: calc(50% - 6px);
+  width: 12px;
+  height: 12px;
+  background: #f2f9ff;
+  transform: rotate(45deg);
+  box-shadow: 0 0 14px #3fd8ff;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.emblem img {
+  width: 46%;
   height: auto;
-  filter: drop-shadow(10px 12px 0 #020b2e) drop-shadow(0 0 30px #3fd8ff88);
+  filter: drop-shadow(8px 10px 0 #020b2e) drop-shadow(0 0 26px #3fd8ffaa);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+.about-art:hover .emblem img {
+  transform: scale(1.06) rotate(-3deg);
+}
+
+/* name */
 .signature {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  font: 400 30px/1 var(--display);
+  margin-top: -6px;
+}
+.signature strong {
+  font: 400 32px/1 var(--display);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #f2f9ff;
@@ -68,21 +156,75 @@
   background: #3fd8ff;
   color: #020b2e;
   font: italic 800 14px var(--ui);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: skewX(-12deg);
 }
-.about-art-bottom {
+
+/* facts */
+.facts {
+  display: grid;
+  gap: 6px;
+  margin: auto 0 0;
+}
+.facts > div {
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
-  font: italic 700 13px var(--ui);
-  letter-spacing: 0.12em;
-  color: #b8f1ff;
+  gap: 16px;
+  padding: 9px 14px;
+  background: #020b2e99;
+  border-left: 3px solid #3fd8ff;
+  transform: skewX(-6deg);
 }
+.facts dt,
+.facts dd {
+  transform: skewX(6deg);
+}
+.facts dt {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font: italic 700 13px var(--ui);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9fbdf0;
+  white-space: nowrap;
+}
+.facts dt b {
+  font: 400 15px var(--display);
+  color: #3fd8ff;
+  letter-spacing: 0;
+}
+.facts dd {
+  margin: 0;
+  font: 600 15px var(--font);
+  color: #f2f9ff;
+  text-align: right;
+}
+
 @media (max-width: 760px) {
   .about-art {
-    min-height: 440px;
-    padding: 24px;
+    min-height: 0;
+    padding: 22px 20px 28px;
   }
-  .signature {
-    font-size: 24px;
+  .emblem {
+    width: min(78%, 280px);
+  }
+  .signature strong {
+    font-size: 27px;
+  }
+  .facts > div {
+    flex-wrap: wrap;
+    gap: 2px 12px;
+  }
+  .facts dd {
+    text-align: left;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .clock i {
+    animation: none;
   }
 }

@@ -8,7 +8,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { BrandPanel } from './brand-panel';
+import { BrandPanel, PanelFact } from './brand-panel';
 import { Icon } from './icon';
 import { CardStat, PlayerCard } from './player-card';
 import { EDUCATION, EXPERIENCE, PROJECTS, Project, Shot, TRANSLATIONS } from './portfolio.data';
@@ -53,6 +53,14 @@ export class App implements AfterViewInit, OnDestroy {
       { label: this.t('Internships'), value: '02', fill: 40 },
       { label: this.t('Auto tests'), value: '240+', fill: 92 },
       { label: this.t('Languages'), value: '03', fill: 55 },
+    ];
+  });
+  readonly aboutFacts = computed<PanelFact[]>(() => {
+    this.lang();
+    return [
+      { label: this.t('Based in'), value: this.t('Tunis, Tunisia') },
+      { label: this.t('Main stack'), value: 'Java · Angular · Flutter' },
+      { label: this.t('Focus'), value: this.t('Full-stack · Mobile · AI') },
     ];
   });
   readonly shotIndex = signal(0);

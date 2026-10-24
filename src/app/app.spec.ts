@@ -160,4 +160,15 @@ describe('App', () => {
     expect(nirvana.frame).toBe('browser');
     expect(nirvana.gallery).toHaveLength(10);
   });
+  it('shows the About panel facts in the current language', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const facts = () => fixture.nativeElement.querySelector('app-brand-panel .facts').textContent;
+    expect(facts()).toContain('Tunis, Tunisia');
+    fixture.componentInstance.setLanguage('fr');
+    await fixture.whenStable();
+    expect(facts()).toContain('Tunis, Tunisie');
+    expect(fixture.nativeElement.querySelector('app-brand-panel .clock').textContent).toMatch(/HEURE DE TUNIS · \d\d:\d\d/);
+    fixture.componentInstance.setLanguage('en');
+  });
 });
