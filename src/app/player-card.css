@@ -1,0 +1,210 @@
+:host {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+}
+.stage {
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+:host(.still) .stage {
+  animation: none;
+}
+@keyframes float {
+  50% {
+    transform: translateY(-14px);
+  }
+}
+.card {
+  --rx: 4deg;
+  --ry: -16deg;
+  --mx: 30%;
+  --my: 20%;
+  position: relative;
+  width: 360px;
+  padding-bottom: 22px;
+  color: #f2f9ff;
+  background: linear-gradient(165deg, #0a2690f2, #041244f7 70%);
+  border: 2px solid #3fd8ff;
+  box-shadow:
+    0 0 50px #3fd8ff55,
+    18px 22px 0 #1452ffaa;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(2deg);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.card.tilting {
+  transition: transform 0.12s linear;
+}
+.glare {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: radial-gradient(circle at var(--mx) var(--my), #ffffff40, transparent 45%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #3fd8ff;
+  color: #020b2e;
+  font: italic 800 15px var(--ui);
+  letter-spacing: 0.14em;
+}
+.photo {
+  position: relative;
+  height: 230px;
+  margin: 14px 18px 0;
+  overflow: hidden;
+  background: linear-gradient(160deg, #b8f1ff 0%, #3fd8ff 30%, #1452ff 70%, #071c6b 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 88% 100%, 0 100%);
+}
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  /* blue duotone: greyscale photo multiplied onto the cyan→blue gradient */
+  filter: grayscale(1) contrast(1.2) brightness(1.1);
+  mix-blend-mode: multiply;
+}
+.photo img.mono {
+  width: 56%;
+  height: auto;
+  margin: 34px auto 0;
+  object-fit: contain;
+  filter: drop-shadow(8px 10px 0 #020b2e);
+  mix-blend-mode: normal;
+}
+.scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, #020b2e22 3px 4px);
+  pointer-events: none;
+}
+.year {
+  position: absolute;
+  z-index: 4;
+  top: 268px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  background: #020b2e;
+  border: 2px solid #3fd8ff;
+  box-shadow: 0 0 18px #3fd8ff88;
+  transform: rotate(45deg);
+}
+.year span {
+  transform: rotate(-45deg);
+  font: italic 800 10px / 1 var(--ui);
+  letter-spacing: 0.12em;
+  color: #3fd8ff;
+  text-align: center;
+}
+.year b {
+  display: block;
+  font: 400 24px / 1.05 var(--display);
+  color: #f2f9ff;
+}
+.name {
+  margin: 16px 90px 0 18px;
+  font: 400 34px / 1 var(--display);
+  text-transform: uppercase;
+  transform: skewX(-6deg);
+  transform-origin: left;
+}
+.role {
+  display: inline-block;
+  margin: 8px 18px 0;
+  padding: 3px 10px;
+  background: #1452ff;
+  font: italic 700 13px var(--ui);
+  letter-spacing: 0.12em;
+}
+.stats {
+  display: grid;
+  gap: 8px;
+  margin: 14px 18px 0;
+}
+.stat {
+  display: grid;
+  grid-template-columns: 104px 1fr 48px;
+  align-items: center;
+  gap: 10px;
+}
+.stat dt {
+  font: italic 700 13px var(--ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8f1ff;
+}
+.bar {
+  height: 9px;
+  background: #1452ff55;
+  transform: skewX(-14deg);
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: #3fd8ff;
+  box-shadow: 0 0 10px #3fd8ff;
+  animation: fill 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: left;
+}
+.stat:nth-child(2) .bar i { animation-delay: 0.15s; }
+.stat:nth-child(3) .bar i { animation-delay: 0.3s; }
+.stat:nth-child(4) .bar i { animation-delay: 0.45s; }
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+.stat dd {
+  margin: 0;
+  font: 400 19px var(--display);
+  text-align: right;
+}
+.shadow {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -46px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(#3fd8ff55, transparent 70%);
+  filter: blur(6px);
+}
+@media (max-width: 760px) {
+  .card {
+    width: min(320px, 86vw);
+    --ry: -8deg;
+  }
+  .photo {
+    height: 190px;
+  }
+  .year {
+    top: 226px;
+    width: 58px;
+    height: 58px;
+  }
+  .name {
+    font-size: 29px;
+  }
+  .stat {
+    grid-template-columns: 92px 1fr 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .bar i {
+    animation: none;
+  }
+}

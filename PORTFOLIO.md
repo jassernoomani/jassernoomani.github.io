@@ -11,7 +11,13 @@ npm start -- --port 4300
 
 Open http://localhost:4300. Production build: `npm run build`. Tests: `npm test -- --watch=false` (7 tests: filters, language, CV/contact links, dialog, menu, clipboard).
 
-Static production files are written to `dist/vite-project/browser`. They can be hosted on any static web host with the root URL serving `index.html`. This workspace has not been publicly deployed.
+Static production files are written to `dist/vite-project/browser`.
+
+## Deploy (GitHub Pages, free)
+
+`.github/workflows/deploy.yml` installs, tests, builds and publishes the site on every push to `main` or `master`. It sets the base path automatically: a repository named `jassernoomani.github.io` is served at `https://jassernoomani.github.io/`; any other name (e.g. `portfolio`) at `https://jassernoomani.github.io/portfolio/`.
+
+One-time setup: create the repository on GitHub, push this folder, then in the repository open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. Progress shows in the **Actions** tab.
 
 ## Structure
 
@@ -20,7 +26,8 @@ Sections, in order: Hero (availability, CV download, key figures) → 01 Work �
 - `src/app/portfolio.data.ts`: **all content** — projects (with key results), experience, education, and every English/French string. Edit text here, not in the template.
 - `src/app/app.html`: page structure, project illustrations, and the project dialog.
 - `src/app/app.css`: one consolidated stylesheet (shared primitives → sections → project visuals → responsive). Colour tokens live in `src/styles.css`.
-- `src/app/three-scene.ts` / `orbital-scene.ts`: the Three.js sculpture and its deferred loading/fallback.
+- `src/app/player-card.*`: the hero "engineer profile" card (tilts with the mouse, floats, pauses with the Motion button). **Your photo goes in `public/photo.jpg`**; it is shown in a blue duotone automatically, and the JN monogram appears until the file exists. Card numbers live in `cardStats` in `app.ts`.
+- `src/app/three-scene.ts` / `orbital-scene.ts`: the earlier Three.js sculpture, no longer used on the page (kept in case you want it back).
 - `src/app/app.ts`: language, filtering, dialog focus, clipboard, contact links.
 - `public/Jasser_Noomani_CV_Fr.pdf`: the downloadable CV. Replace this file to update it everywhere.
 

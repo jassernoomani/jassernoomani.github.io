@@ -92,23 +92,16 @@
           ><span>{{ t('Download CV') }}</span> <app-icon class="button-icon" name="download"
         /></a>
       </div>
-      <dl class="hero-stats">
-        <div>
-          <dt>{{ t('projects') }}</dt>
-          <dd>06</dd>
-        </div>
-        <div>
-          <dt>{{ t('internships') }}</dt>
-          <dd>02</dd>
-        </div>
-        <div>
-          <dt>{{ t('automated tests') }}</dt>
-          <dd>240+</dd>
-        </div>
-      </dl>
     </div>
     <div class="hero-art">
-      <app-orbital-scene [paused]="reducedMotion()" /><span class="art-label label-top">{{
+      <app-player-card
+        [paused]="reducedMotion()"
+        [heading]="t('ENGINEER PROFILE')"
+        [role]="t('FULL-STACK · MOBILE · AI')"
+        [yearLabel]="t('YEAR')"
+        [yearNote]="t('FINAL')"
+        [stats]="cardStats()"
+      /><span class="art-label label-top">{{
         t('IDEAS INTO SYSTEMS')
       }}</span
       ><span class="art-label label-side">{{ t('CONTINUOUS EXPLORATION') }}</span>
@@ -116,7 +109,7 @@
     <div class="hero-bottom">
       <a class="scroll-cue" href="#work"
         ><span class="scroll-line" aria-hidden="true"></span>{{ t('SCROLL TO EXPLORE') }}</a
-      ><span class="drag-cue">{{ t('DRAG THE OBJECT. GET CURIOUS.') }}</span
+      ><span class="drag-cue">{{ t('TILT THE CARD. GET CURIOUS.') }}</span
       ><button
         class="motion-toggle"
         (click)="reducedMotion.set(!reducedMotion())"

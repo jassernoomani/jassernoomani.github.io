@@ -1,13 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
 import { vi } from 'vitest';
 import { App } from './app';
-import { OrbitalScene } from './orbital-scene';
-
-@Component({ selector: 'app-orbital-scene', template: '' })
-class SceneStub {
-  @Input() paused = false;
-}
 
 describe('App', () => {
   beforeEach(async () => {
@@ -15,10 +8,6 @@ describe('App', () => {
     await TestBed.configureTestingModule({
       imports: [App],
     })
-      .overrideComponent(App, {
-        remove: { imports: [OrbitalScene] },
-        add: { imports: [SceneStub] },
-      })
       .compileComponents();
   });
 

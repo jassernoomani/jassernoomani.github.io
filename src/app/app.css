@@ -1735,12 +1735,11 @@ footer .wordmark img {
     top: 0;
     right: 0;
     width: auto;
-    height: 360px;
-    margin: 6px -6% 0;
+    height: 600px;
+    margin: 10px -6% 0;
   }
-  .label-top {
-    top: 4%;
-    left: 8%;
+  .art-label {
+    display: none;
   }
   .label-side {
     right: 5%;

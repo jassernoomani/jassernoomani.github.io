@@ -1,0 +1,31 @@
+<div class="stage">
+  <div class="card" #card>
+    <div class="glare" aria-hidden="true"></div>
+    <div class="card-head">
+      <span>{{ heading }}</span><span>JN · 2027</span>
+    </div>
+    <div class="photo">
+      @if (!photoFailed()) {
+        <img [src]="photo" [alt]="name" (error)="photoFailed.set(true)" />
+      } @else {
+        <img class="mono" src="brand-mark.svg" alt="" />
+      }
+      <i class="scan" aria-hidden="true"></i>
+    </div>
+    <div class="year" aria-hidden="true">
+      <span>{{ yearLabel }}<b>5</b>{{ yearNote }}</span>
+    </div>
+    <p class="name">{{ name }}</p>
+    <p class="role">{{ role }}</p>
+    <dl class="stats">
+      @for (s of stats; track s.label) {
+        <div class="stat">
+          <dt>{{ s.label }}</dt>
+          <span class="bar" aria-hidden="true"><i [style.width.%]="s.fill"></i></span>
+          <dd>{{ s.value }}</dd>
+        </div>
+      }
+    </dl>
+  </div>
+  <div class="shadow" aria-hidden="true"></div>
+</div>
