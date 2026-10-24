@@ -16,7 +16,12 @@ export type IconName =
   | 'window'
   | 'download'
   | 'phone'
-  | 'shield-check';
+  | 'shield-check'
+  | 'chevron-left'
+  | 'chevron-right'
+  | 'arrows-fullscreen'
+  | 'zoom-in'
+  | 'zoom-out';
 
 /** Bootstrap Icons, bundled locally. License and original SVGs live in public/icons. */
 @Component({

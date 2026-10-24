@@ -184,40 +184,27 @@
             @switch (project.id) {
               @case ('ebiessa') {
                 <div class="art ebiessa-art" aria-hidden="true">
-                  <div class="ebiessa-brand">e<span>·</span>biessa<span class="brand-star">✳</span></div>
-                  <p>{{ t('FIND YOUR PERFECT FIT.') }}</p>
-                  <div class="search-demo">
-                    <span class="search-symbol">⌕</span
-                    ><span>{{ t('Find a part that fits my car') }}</span
-                    ><span class="ai-chip">{{ t('AI SEARCH') }}</span>
+                  <div class="eb-browser">
+                    <span class="browser-bar"><i></i><i></i><i></i><b>e-biessa.tn</b></span>
+                    <img src="projects/ebiessa/01-accueil.webp" alt="" loading="lazy" width="1920" height="1080" />
                   </div>
-                  <div class="search-nodes">
-                    <span>{{ t('YOUR VEHICLE') }}</span><i></i><span>{{ t('SEMANTIC SEARCH') }}</span
-                    ><i></i><span class="match-node">{{ t('THE RIGHT PART') }}</span>
+                  <div class="eb-browser eb-mini">
+                    <span class="browser-bar"><i></i><i></i><i></i></span>
+                    <img src="projects/ebiessa/11-photo-2.webp" alt="" loading="lazy" width="1920" height="1080" />
                   </div>
+                  <span class="demo-chip"><app-icon name="play" />{{ t('WATCH THE DEMO') }} · 1:15</span>
                 </div>
               }
               @case ('nova') {
                 <div class="art nova-art" aria-hidden="true">
-                  <div class="phone">
-                    <span class="phone-notch"></span>
-                    <span class="phone-title">{{ t('Floor') }} 3</span>
-                    <div class="room-grid">
-                      <i class="r-free">301</i><i class="r-clean">302</i><i class="r-occ">303</i
-                      ><i class="r-free">304</i><i class="r-occ">305</i><i class="r-clean">306</i
-                      ><i class="r-out">307</i><i class="r-free">308</i><i class="r-occ">309</i>
-                    </div>
-                    <span class="phone-bar"></span>
+                  <div class="phones">
+                    <span class="phone phone-back"><img src="projects/nova/02_accueil_gouvernante.webp" alt="" loading="lazy" /></span>
+                    <span class="phone phone-front"><img src="projects/nova/03_chambres_statuts.webp" alt="" loading="lazy" /></span>
                   </div>
                   <div class="nova-side">
                     <strong>nova<span>paris</span></strong>
                     <p>{{ t('HOUSEKEEPING, LIVE.') }}</p>
-                    <ul class="legend">
-                      <li><i class="r-free"></i>{{ t('Free') }}</li>
-                      <li><i class="r-clean"></i>{{ t('To clean') }}</li>
-                      <li><i class="r-occ"></i>{{ t('Occupied') }}</li>
-                      <li><i class="r-out"></i>{{ t('Out of order') }}</li>
-                    </ul>
+                    <p class="nova-note">{{ t('REAL SCREENS · ANDROID 14') }}</p>
                     <span class="badge"><app-icon name="check" />43/43 · {{ t('E2E ON DEVICE') }}</span>
                   </div>
                 </div>
@@ -610,6 +597,47 @@
           }
         </dl>
       }
+      @if (project.video; as video) {
+        <h3>{{ t('Demo video') }} · {{ video.length }}</h3>
+        <p class="gallery-note">
+          {{ t('A walkthrough of the marketplace, recorded in the local demo environment (captions in French).') }}
+        </p>
+        <div class="demo-video">
+          <video controls playsinline preload="none" [poster]="video.poster" [src]="video.src"></video>
+        </div>
+      }
+      @if (project.gallery?.length) {
+        <h3>{{ t('Screens from the app') }}</h3>
+        <p class="gallery-note">
+          {{
+            t(
+              project.frame === 'browser'
+                ? 'Screenshots from the local demo environment.'
+                : 'Real screenshots from the 43-step end-to-end test on an Android phone.'
+            )
+          }}
+        </p>
+        <div class="gallery-wrap">
+          <button class="strip-nav strip-prev" (click)="scrollStrip(strip, -1)" [attr.aria-label]="t('Scroll screens left')">
+            <app-icon name="chevron-left" />
+          </button>
+          <ul class="gallery" #strip [class.browser]="project.frame === 'browser'">
+            @for (shot of project.gallery; track shot.src; let i = $index) {
+              <li>
+                <button class="shot-thumb" (click)="openShot(i)" [attr.aria-label]="t('Open screen') + ': ' + t(shot.caption)">
+                  <img [src]="shot.src" alt="" loading="lazy" [attr.width]="project.frame === 'browser' ? 1920 : 540" [attr.height]="project.frame === 'browser' ? 1080 : 1178" />
+                  <span class="shot-num">{{ pad(i + 1) }}</span>
+                  <span class="zoom" aria-hidden="true"><app-icon name="arrows-fullscreen" /></span>
+                </button>
+                <span class="shot-caption">{{ t(shot.caption) }}</span>
+              </li>
+            }
+          </ul>
+          <button class="strip-nav strip-next" (click)="scrollStrip(strip, 1)" [attr.aria-label]="t('Scroll screens right')">
+            <app-icon name="chevron-right" />
+          </button>
+        </div>
+      }
       <h3>{{ t('The challenge') }}</h3>
       <p>{{ t(project.challenge) }}</p>
       <h3>{{ t('What I built') }}</h3>
@@ -624,4 +652,71 @@
       /></a>
     }
   </div>
+</dialog>
+<dialog
+  #shotViewer
+  class="shot-viewer"
+  [attr.aria-label]="t('Screen viewer')"
+  (close)="onShotClose()"
+  (click)="onViewerClick($event)"
+  (keydown)="onViewerKey($event)"
+  (cancel)="onViewerCancel($event)"
+>
+  @if (currentShot(); as shot) {
+    <div class="viewer-top">
+      <span class="viewer-count">{{ pad(shotIndex() + 1) }} <i>/</i> {{ pad(shots().length) }}</span>
+      <span class="viewer-title">{{ selectedProject()?.name }}</span>
+      <button class="viewer-close" (click)="closeShot()" [attr.aria-label]="t('Close')" autofocus>×</button>
+    </div>
+    <div class="viewer-stage" (pointerdown)="onSwipeStart($event)" (pointerup)="onSwipeEnd($event)">
+      <button class="viewer-nav viewer-prev" (click)="stepShot(-1)" [attr.aria-label]="t('Previous screen')">
+        <app-icon name="chevron-left" />
+      </button>
+      <div class="viewer-track" [class.browser]="selectedProject()?.frame === 'browser'">
+        @for (s of shots(); track s.src; let i = $index) {
+          <figure
+            class="slide"
+            [style.--d]="offset(i)"
+            [class.on]="offset(i) === 0"
+            [class.side]="offset(i) === 1 || offset(i) === -1"
+            [attr.aria-hidden]="offset(i) !== 0"
+            (click)="offset(i) === 0 ? null : goShot(i)"
+          >
+            <div class="frame">
+              @if (selectedProject()?.frame === 'browser') {
+                <span class="browser-bar"><i></i><i></i><i></i></span>
+              }
+              <div
+                class="zoom-box"
+                [class.zoomed]="zoomed() && offset(i) === 0"
+                [style.--zx]="zoomX() + '%'"
+                [style.--zy]="zoomY() + '%'"
+                (pointerdown)="offset(i) === 0 && onZoomDown($event)"
+                (pointermove)="offset(i) === 0 && onZoomMove($event)"
+              >
+                <img [src]="s.src" [alt]="t(s.caption)" draggable="false" />
+              </div>
+            </div>
+          </figure>
+        }
+      </div>
+      <button class="viewer-nav viewer-next" (click)="stepShot(1)" [attr.aria-label]="t('Next screen')">
+        <app-icon name="chevron-right" />
+      </button>
+    </div>
+    <p class="viewer-caption" aria-live="polite">
+      <span>{{ t(shot.caption) }}</span>
+      <button class="zoom-toggle" (click)="toggleZoom()" [attr.aria-pressed]="zoomed()">
+        <app-icon [name]="zoomed() ? 'zoom-out' : 'zoom-in'" />{{ t(zoomed() ? 'Zoom out' : 'Zoom in') }}
+      </button>
+    </p>
+    <div class="viewer-strip" [class.browser]="selectedProject()?.frame === 'browser'">
+      @for (s of shots(); track s.src; let i = $index) {
+        <button [class.active]="i === shotIndex()" (click)="goShot(i)" [attr.aria-label]="t(s.caption)" [attr.aria-current]="i === shotIndex()">
+          <img [src]="s.src" alt="" loading="lazy" />
+        </button>
+      }
+    </div>
+    <p class="viewer-hint">{{ t('← → to browse · click the screen to zoom · Esc to close') }}</p>
+  }
 </dialog>

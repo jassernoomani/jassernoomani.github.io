@@ -119,4 +119,37 @@ describe('App', () => {
     expect(fixture.componentInstance.copyError()).toBe(true);
     expect(writeText).toHaveBeenCalledWith('Jasser.NOOMANI@esprit.tn');
   });
+  it('browses project screenshots in the viewer and wraps around at both ends', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const app = fixture.componentInstance;
+    const nova = app.projects.find((p) => p.id === 'nova')!;
+    app.selectedProject.set(nova);
+    const viewer = fixture.nativeElement.querySelector('.shot-viewer') as HTMLDialogElement;
+    viewer.showModal = vi.fn(() => viewer.setAttribute('open', ''));
+    app.openShot(0);
+    await fixture.whenStable();
+    expect(app.currentShot()?.src).toBe(nova.gallery![0].src);
+    app.stepShot(-1);
+    expect(app.shotIndex()).toBe(nova.gallery!.length - 1);
+    app.stepShot(1);
+    expect(app.shotIndex()).toBe(0);
+    app.onViewerKey(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    expect(app.shotIndex()).toBe(1);
+    app.onShotClose();
+    expect(app.currentShot()).toBeNull();
+  });
+  it('shows the e-Biessa demo video and browser-framed screenshots in its details', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const dialog = fixture.nativeElement.querySelector('.project-dialog') as HTMLDialogElement;
+    dialog.showModal = vi.fn(() => dialog.setAttribute('open', ''));
+    fixture.componentInstance.openProject(fixture.componentInstance.projects[0]);
+    await fixture.whenStable();
+    const video = dialog.querySelector('video') as HTMLVideoElement;
+    expect(video.getAttribute('src')).toBe('projects/ebiessa/demo.mp4');
+    expect(video.getAttribute('preload')).toBe('none');
+    expect(dialog.querySelector('.gallery.browser')).not.toBeNull();
+    expect(dialog.querySelectorAll('.shot-thumb')).toHaveLength(9);
+  });
 });

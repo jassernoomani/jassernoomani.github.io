@@ -11,7 +11,7 @@ import {
 import { BrandPanel } from './brand-panel';
 import { Icon } from './icon';
 import { CardStat, PlayerCard } from './player-card';
-import { EDUCATION, EXPERIENCE, PROJECTS, Project, TRANSLATIONS } from './portfolio.data';
+import { EDUCATION, EXPERIENCE, PROJECTS, Project, Shot, TRANSLATIONS } from './portfolio.data';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,7 @@ import { EDUCATION, EXPERIENCE, PROJECTS, Project, TRANSLATIONS } from './portfo
 })
 export class App implements AfterViewInit, OnDestroy {
   @ViewChild('projectDialog') projectDialog?: ElementRef<HTMLDialogElement>;
+  @ViewChild('shotViewer') shotViewer?: ElementRef<HTMLDialogElement>;
   readonly projects = PROJECTS;
   readonly experience = EXPERIENCE;
   readonly education = EDUCATION;
@@ -54,6 +55,15 @@ export class App implements AfterViewInit, OnDestroy {
       { label: this.t('Languages'), value: '03', fill: 55 },
     ];
   });
+  readonly shotIndex = signal(0);
+  readonly viewerOpen = signal(false);
+  readonly shots = computed<Shot[]>(() => this.selectedProject()?.gallery ?? []);
+  readonly currentShot = computed(() => (this.viewerOpen() ? this.shots()[this.shotIndex()] : null));
+  readonly zoomed = signal(false);
+  readonly zoomX = signal(50);
+  readonly zoomY = signal(50);
+  private swipeX: number | null = null;
+  private lastTap = 0;
   private copyTimer?: ReturnType<typeof setTimeout>;
   private lastFocus?: HTMLElement;
 
@@ -110,6 +120,92 @@ export class App implements AfterViewInit, OnDestroy {
     document.body.style.overflow = '';
     this.selectedProject.set(null);
     this.lastFocus?.focus();
+  }
+  openShot(index: number) {
+    this.shotIndex.set(index);
+    this.zoomed.set(false);
+    this.viewerOpen.set(true);
+    this.shotViewer?.nativeElement.showModal();
+  }
+  closeShot() {
+    this.shotViewer?.nativeElement.close();
+  }
+  onShotClose() {
+    this.viewerOpen.set(false);
+    this.zoomed.set(false);
+  }
+  /** Shortest signed distance from the current screen, so the carousel wraps smoothly. */
+  offset(i: number) {
+    const n = this.shots().length;
+    const half = Math.floor(n / 2);
+    return ((((i - this.shotIndex()) % n) + n + half) % n) - half;
+  }
+  goShot(index: number) {
+    this.zoomed.set(false);
+    this.shotIndex.set(index);
+  }
+  stepShot(delta: number) {
+    const n = this.shots().length;
+    if (n) this.goShot((this.shotIndex() + delta + n) % n);
+  }
+  toggleZoom(x = 50, y = 50) {
+    if (!this.zoomed()) {
+      this.zoomX.set(x);
+      this.zoomY.set(y);
+    }
+    this.zoomed.set(!this.zoomed());
+  }
+  private zoomPoint(event: PointerEvent) {
+    const r = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    const clamp = (v: number) => Math.min(100, Math.max(0, v));
+    return [clamp(((event.clientX - r.left) / r.width) * 100), clamp(((event.clientY - r.top) / r.height) * 100)];
+  }
+  onZoomDown(event: PointerEvent) {
+    const [x, y] = this.zoomPoint(event);
+    if (event.pointerType === 'mouse') {
+      if (event.button === 0) this.toggleZoom(x, y);
+      return;
+    }
+    const now = Date.now();
+    if (now - this.lastTap < 320) this.toggleZoom(x, y);
+    this.lastTap = now;
+  }
+  onZoomMove(event: PointerEvent) {
+    if (!this.zoomed()) return;
+    const [x, y] = this.zoomPoint(event);
+    this.zoomX.set(x);
+    this.zoomY.set(y);
+  }
+  onViewerKey(event: KeyboardEvent) {
+    if (event.key === 'ArrowRight') this.stepShot(1);
+    else if (event.key === 'ArrowLeft') this.stepShot(-1);
+    else if (event.key === '+' || event.key === '=') this.zoomed.set(true);
+    else if (event.key === '-') this.zoomed.set(false);
+    else return;
+    event.preventDefault();
+  }
+  onViewerCancel(event: Event) {
+    if (this.zoomed()) {
+      event.preventDefault();
+      this.zoomed.set(false);
+    }
+  }
+  onViewerClick(event: MouseEvent) {
+    const el = event.target as HTMLElement;
+    if (el === this.shotViewer?.nativeElement || el.classList.contains('viewer-stage') || el.classList.contains('viewer-track'))
+      this.closeShot();
+  }
+  onSwipeStart(event: PointerEvent) {
+    this.swipeX = event.pointerType === 'mouse' || this.zoomed() ? null : event.clientX;
+  }
+  onSwipeEnd(event: PointerEvent) {
+    if (this.swipeX === null) return;
+    const dx = event.clientX - this.swipeX;
+    this.swipeX = null;
+    if (Math.abs(dx) > 40) this.stepShot(dx < 0 ? 1 : -1);
+  }
+  scrollStrip(strip: HTMLElement, direction: number) {
+    strip.scrollBy({ left: direction * strip.clientWidth * 0.8, behavior: 'smooth' });
   }
   closeOnBackdrop(event: MouseEvent) {
     if (event.target === this.projectDialog?.nativeElement) this.closeProject();

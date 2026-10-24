@@ -19,6 +19,15 @@ export interface Project {
   challenge: string;
   contributions: string[];
   scope: string;
+  gallery?: Shot[];
+  /** How screenshots are framed: phone (portrait) or browser (16:9). Defaults to phone. */
+  frame?: 'phone' | 'browser';
+  video?: { src: string; poster: string; length: string };
+}
+
+export interface Shot {
+  src: string;
+  caption: string;
 }
 
 export interface TimelineItem {
@@ -97,6 +106,22 @@ const l = (en: string, fr: string) => {
   ['CONNECTED MUNICIPAL SERVICES', 'SERVICES MUNICIPAUX CONNECTÉS'],
   ['HOUSEKEEPING, LIVE.', 'LE MÉNAGE, EN DIRECT.'],
   ['Floor', 'Étage'],
+  ['Screens from the app', 'Écrans de l’application'],
+  ['Demo video', 'Vidéo de démonstration'],
+  ['A walkthrough of the marketplace, recorded in the local demo environment (captions in French).', 'Visite guidée de la marketplace, enregistrée dans l’environnement de démonstration local (sous-titres en français).'],
+  ['Screenshots from the local demo environment.', 'Captures de l’environnement de démonstration local.'],
+  ['WATCH THE DEMO', 'VOIR LA DÉMO'],
+  ['Scroll screens left', 'Faire défiler vers la gauche'],
+  ['Scroll screens right', 'Faire défiler vers la droite'],
+  ['Open screen', 'Ouvrir l’écran'],
+  ['Screen viewer', 'Visionneuse d’écrans'],
+  ['Previous screen', 'Écran précédent'],
+  ['Next screen', 'Écran suivant'],
+  ['← → to browse · click the screen to zoom · Esc to close', '← → pour naviguer · cliquez sur l’écran pour zoomer · Échap pour fermer'],
+  ['Zoom in', 'Zoomer'],
+  ['Zoom out', 'Dézoomer'],
+  ['Real screenshots from the 43-step end-to-end test on an Android phone.', 'Captures réelles du test de bout en bout de 43 étapes sur téléphone Android.'],
+  ['REAL SCREENS · ANDROID 14', 'ÉCRANS RÉELS · ANDROID 14'],
   ['ENGINEER PROFILE', 'PROFIL INGÉNIEUR'],
   ['FULL-STACK · MOBILE · AI', 'FULL-STACK · MOBILE · IA'],
   ['YEAR', 'ANNÉE'],
@@ -260,6 +285,20 @@ export const PROJECTS: Project[] = [
       'Internship at ReaddlyTech · July–August 2026 · Local development and resilience lab; no public production deployment is claimed.',
       'Stage chez ReaddlyTech · juillet–août 2026 · Développement local et laboratoire de résilience ; aucun déploiement public en production n’est revendiqué.',
     ),
+
+    frame: 'browser',
+    video: { src: 'projects/ebiessa/demo.mp4', poster: 'projects/ebiessa/01-accueil.webp', length: '1:15' },
+    gallery: [
+      { src: 'projects/ebiessa/01-accueil.webp', caption: l('Home: keyword and fitment search', 'Accueil : recherche par mot-clé et compatibilité') },
+      { src: 'projects/ebiessa/02-recherche-ia.webp', caption: l('AI search with compatibility checks', 'Recherche IA et contrôles de compatibilité') },
+      { src: 'projects/ebiessa/11-photo-2.webp', caption: l('Identify a part from a photo', 'Identification d’une pièce par photo') },
+      { src: 'projects/ebiessa/03-fiche-annonce.webp', caption: l('Listing page and vehicle compatibility', 'Fiche annonce et compatibilité véhicule') },
+      { src: 'projects/ebiessa/04-messagerie.webp', caption: l('Buyer–seller messaging', 'Messagerie acheteur–vendeur') },
+      { src: 'projects/ebiessa/06-studio-vendeur.webp', caption: l('Seller studio: inventory', 'Studio vendeur : inventaire') },
+      { src: 'projects/ebiessa/07-nouvelle-annonce.webp', caption: l('New listing with price guidance', 'Nouvelle annonce avec aide au prix') },
+      { src: 'projects/ebiessa/08-administration.webp', caption: l('Admin dashboard and moderation', 'Administration et modération') },
+      { src: 'projects/ebiessa/05-accueil-sombre.webp', caption: l('Dark mode', 'Mode sombre') },
+    ],
   },
   {
     id: 'nova',
@@ -307,6 +346,18 @@ export const PROJECTS: Project[] = [
       'Mobile development course project · ESPRIT · 2026',
       'Projet du module Développement mobile · ESPRIT · 2026',
     ),
+
+    gallery: [
+      { src: 'projects/nova/01_connexion.webp', caption: l('Sign-in: pick a demo profile', 'Connexion : choix du profil') },
+      { src: 'projects/nova/02_accueil_gouvernante.webp', caption: l('Supervisor home', 'Accueil de la gouvernante') },
+      { src: 'projects/nova/03_chambres_statuts.webp', caption: l('Room statuses and filters', 'Statuts des chambres et filtres') },
+      { src: 'projects/nova/05_attribution_auto.webp', caption: l('Automatic assignment', 'Attribution automatique') },
+      { src: 'projects/nova/18_accueil_agent.webp', caption: l('Agent home: today’s rooms', 'Accueil agent : chambres du jour') },
+      { src: 'projects/nova/20_nettoyage_demarre.webp', caption: l('Cleaning timer and checklist', 'Minuteur et liste de contrôle') },
+      { src: 'projects/nova/14_tableau_de_bord.webp', caption: l('Live dashboard', 'Tableau de bord en direct') },
+      { src: 'projects/nova/38_manager_etages.webp', caption: l('Manager: floors and rooms', 'Manager : étages et chambres') },
+      { src: 'projects/nova/42_restauration.webp', caption: l('Backup and restore', 'Sauvegarde et restauration') },
+    ],
   },
   {
     id: 'nirvana',

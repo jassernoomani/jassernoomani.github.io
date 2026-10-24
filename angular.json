@@ -37,6 +37,7 @@
               "@fontsource/barlow-condensed/700-italic.css",
               "@fontsource/barlow-condensed/800-italic.css",
               "src/project-art.css",
+              "src/gallery.css",
               "src/styles.css"
             ]
           },

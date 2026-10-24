@@ -1843,19 +1843,18 @@ footer .wordmark img {
   .nova-art {
     gap: 18px;
   }
-  .phone {
-    width: 106px;
-    height: 196px;
-    padding: 20px 9px 10px;
+  .phones {
+    width: 160px;
+    height: 210px;
   }
-  .room-grid i {
-    height: 26px;
+  .phone {
+    width: 92px;
+  }
+  .phone-front {
+    left: 64px;
   }
   .nova-side strong {
     font-size: 40px;
-  }
-  .legend {
-    grid-template-columns: 1fr;
   }
   .badge {
     font-size: 11px;
