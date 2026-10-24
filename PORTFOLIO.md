@@ -30,6 +30,7 @@ Sections, in order: Hero (availability, CV download, key figures) → 01 Work �
 - `src/app/three-scene.ts` / `orbital-scene.ts`: the earlier Three.js sculpture, no longer used on the page (kept in case you want it back).
 - `src/app/app.ts`: language, filtering, dialog focus, clipboard, contact links.
 - `public/projects/ebiessa/`: e-Biessa demo video (`demo.mp4`, re-encoded to 720p, 1.6 MB, loads only when played) and 9 screenshots from the local demo (1920×1080 WebP, sharp when zoomed). The project uses `frame: 'browser'`, so screens are shown in a browser frame instead of a phone.
+- `public/projects/nirvana/`: Nirvana's narrated demo (`demo.mp4`, 4:21 with audio, compressed from 88 MB to 5.9 MB) and 10 screenshots taken from the project report captures (1366×768 WebP).
 - `public/projects/nova/`: real Nova Paris screenshots from the 43-step on-device E2E run (resized to 540px WebP). They appear on the project card and in the project's "Screens from the app" gallery; add a `gallery` list to any project in `portfolio.data.ts` to give it one too. Clicking a screen opens a full-screen carousel viewer: neighbouring screens peek in at the sides and slide across; arrow buttons, ← → keys, swipe on phones, thumbnail strip; click (or double-tap) the screen to zoom 2.4× where you point and move to pan; Esc zooms out, then closes; its styles are in `src/gallery.css`.
 - `public/Jasser_Noomani_CV_Fr.pdf`: the downloadable CV. Replace this file to update it everywhere.
 

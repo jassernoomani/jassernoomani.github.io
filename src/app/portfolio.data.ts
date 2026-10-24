@@ -22,7 +22,7 @@ export interface Project {
   gallery?: Shot[];
   /** How screenshots are framed: phone (portrait) or browser (16:9). Defaults to phone. */
   frame?: 'phone' | 'browser';
-  video?: { src: string; poster: string; length: string };
+  video?: { src: string; poster: string; length: string; note: string };
 }
 
 export interface Shot {
@@ -110,6 +110,8 @@ const l = (en: string, fr: string) => {
   ['Demo video', 'Vidéo de démonstration'],
   ['A walkthrough of the marketplace, recorded in the local demo environment (captions in French).', 'Visite guidée de la marketplace, enregistrée dans l’environnement de démonstration local (sous-titres en français).'],
   ['Screenshots from the local demo environment.', 'Captures de l’environnement de démonstration local.'],
+  ['A narrated walkthrough of the customer and staff sides, recorded on the local demo.', 'Visite commentée des espaces client et personnel, enregistrée sur la démo locale.'],
+  ['LOCAL AI · NARRATED DEMO', 'IA LOCALE · DÉMO COMMENTÉE'],
   ['WATCH THE DEMO', 'VOIR LA DÉMO'],
   ['Scroll screens left', 'Faire défiler vers la gauche'],
   ['Scroll screens right', 'Faire défiler vers la droite'],
@@ -287,7 +289,12 @@ export const PROJECTS: Project[] = [
     ),
 
     frame: 'browser',
-    video: { src: 'projects/ebiessa/demo.mp4', poster: 'projects/ebiessa/01-accueil.webp', length: '1:15' },
+    video: {
+      src: 'projects/ebiessa/demo.mp4',
+      poster: 'projects/ebiessa/01-accueil.webp',
+      length: '1:15',
+      note: 'A walkthrough of the marketplace, recorded in the local demo environment (captions in French).',
+    },
     gallery: [
       { src: 'projects/ebiessa/01-accueil.webp', caption: l('Home: keyword and fitment search', 'Accueil : recherche par mot-clé et compatibilité') },
       { src: 'projects/ebiessa/02-recherche-ia.webp', caption: l('AI search with compatibility checks', 'Recherche IA et contrôles de compatibilité') },
@@ -405,6 +412,26 @@ export const PROJECTS: Project[] = [
       'AI for Software Engineering course project · ESPRIT · 2026',
       'Projet du module IA pour le génie logiciel · ESPRIT · 2026',
     ),
+
+    frame: 'browser',
+    video: {
+      src: 'projects/nirvana/demo.mp4',
+      poster: 'projects/nirvana/01-menu.webp',
+      length: '4:21',
+      note: 'A narrated walkthrough of the customer and staff sides, recorded on the local demo.',
+    },
+    gallery: [
+      { src: 'projects/nirvana/01-menu.webp', caption: l('Customer menu', 'Menu client') },
+      { src: 'projects/nirvana/02-recommandations.webp', caption: l('Allergy-aware recommendations (local LLM)', 'Recommandations tenant compte des allergies (LLM local)') },
+      { src: 'projects/nirvana/03-panier.webp', caption: l('Cart and checkout', 'Panier et validation de commande') },
+      { src: 'projects/nirvana/04-reservations.webp', caption: l('Table reservations', 'Réservation de table') },
+      { src: 'projects/nirvana/05-avis.webp', caption: l('Order details and review form', 'Détail de commande et avis') },
+      { src: 'projects/nirvana/06-cuisine.webp', caption: l('Kitchen board: New, Preparing, Ready', 'Tableau cuisine : nouvelles, en préparation, prêtes') },
+      { src: 'projects/nirvana/07-stock.webp', caption: l('Inventory with low-stock warnings', 'Stock avec alertes de seuil') },
+      { src: 'projects/nirvana/08-prevision.webp', caption: l('Demand forecast (scikit-learn)', 'Prévision de la demande (scikit-learn)') },
+      { src: 'projects/nirvana/09-analyse-avis.webp', caption: l('Review analysis (local LLM)', 'Analyse des avis (LLM local)') },
+      { src: 'projects/nirvana/10-prompts.webp', caption: l('Prompts and methodology, shown to staff', 'Prompts et méthodologie, visibles par le personnel') },
+    ],
   },
   {
     id: 'aletheia',

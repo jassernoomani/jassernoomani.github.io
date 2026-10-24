@@ -152,4 +152,12 @@ describe('App', () => {
     expect(dialog.querySelector('.gallery.browser')).not.toBeNull();
     expect(dialog.querySelectorAll('.shot-thumb')).toHaveLength(9);
   });
+  it('gives Nirvana its narrated demo and ten browser-framed screens', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const nirvana = fixture.componentInstance.projects.find((p) => p.id === 'nirvana')!;
+    expect(nirvana.video?.src).toBe('projects/nirvana/demo.mp4');
+    expect(nirvana.frame).toBe('browser');
+    expect(nirvana.gallery).toHaveLength(10);
+  });
 });

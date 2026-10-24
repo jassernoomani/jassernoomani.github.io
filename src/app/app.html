@@ -210,17 +210,16 @@
                 </div>
               }
               @case ('nirvana') {
-                <div class="art nirvana-art" aria-hidden="true">
-                  <strong class="nirvana-brand">nirvana<span>.</span></strong>
-                  <div class="reco-card">
-                    <span class="reco-label">{{ t('RECOMMENDED FOR YOU') }}</span>
-                    <div class="reco-row"><span class="dish"></span><span class="lines"><i></i><i></i></span><b>✓</b></div>
-                    <div class="reco-row"><span class="dish"></span><span class="lines"><i></i><i></i></span><b>✓</b></div>
-                    <div class="reco-chips">
-                      <span><app-icon name="shield-check" />{{ t('Allergy-safe') }}</span
-                      ><span>{{ t('Local LLM') }}</span><span>{{ t('Rule fallback') }}</span>
-                    </div>
+                <div class="art ebiessa-art nirvana-shots" aria-hidden="true">
+                  <div class="eb-browser">
+                    <span class="browser-bar"><i></i><i></i><i></i><b>nirvana · local</b></span>
+                    <img src="projects/nirvana/02-recommandations.webp" alt="" loading="lazy" width="1366" height="768" />
                   </div>
+                  <div class="eb-browser eb-mini">
+                    <span class="browser-bar"><i></i><i></i><i></i></span>
+                    <img src="projects/nirvana/06-cuisine.webp" alt="" loading="lazy" width="1366" height="768" />
+                  </div>
+                  <span class="demo-chip"><app-icon name="play" />{{ t('WATCH THE DEMO') }} · 4:21</span>
                 </div>
               }
               @case ('aletheia') {
@@ -600,7 +599,7 @@
       @if (project.video; as video) {
         <h3>{{ t('Demo video') }} · {{ video.length }}</h3>
         <p class="gallery-note">
-          {{ t('A walkthrough of the marketplace, recorded in the local demo environment (captions in French).') }}
+          {{ t(video.note) }}
         </p>
         <div class="demo-video">
           <video controls playsinline preload="none" [poster]="video.poster" [src]="video.src"></video>
