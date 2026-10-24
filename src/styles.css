@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+/* Midnight-tide palette: deep ocean blues, electric cyan, moonlight white. */
+:root {
+  color-scheme: dark;
+  --abyss: #020b2e;
+  --bg: #041244;
+  --deep: #071c6b;
+  --surface: #0a2690;
+  --blue: #1452ff;
+  --electric: #2f7bff;
+  --cyan: #3fd8ff;
+  --ice: #b8f1ff;
+  --text: #f2f9ff;
+  --muted: #9fbdf0;
+  --line: #2a52c8;
+  --steel: #2a52c8;
+  --accent: #3fd8ff;
+  --font: 'Barlow', 'Segoe UI', sans-serif;
+  --ui: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --display: 'Anton', 'Impact', sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--abyss);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+  border-radius: 0;
+}
+button,
+a {
+  touch-action: manipulation;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+::selection {
+  background: var(--cyan);
+  color: var(--abyss);
+}
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 5px;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+em {
+  font-style: normal;
+  color: var(--cyan);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

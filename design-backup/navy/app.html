@@ -1,0 +1,612 @@
+<a class="skip-link" href="#work">{{ t('Skip to selected work') }}</a>
+<header class="header">
+  <a class="wordmark" href="#home" aria-label="Jasser Noomani" (click)="navigate()"
+    ><img src="brand-mark.svg" width="44" height="44" alt="" /><span class="wordmark-name"
+      >Jasser<span>Noomani</span></span
+    ></a
+  >
+  <nav class="desktop-nav" [attr.aria-label]="t('Menu')">
+    <a href="#work">{{ t('Work') }} <sup>{{ total }}</sup></a
+    ><a href="#experience">{{ t('Experience') }}</a
+    ><a href="#skills">{{ t('Skills') }}</a
+    ><a href="#about">{{ t('About') }}</a>
+  </nav>
+  <div class="header-right">
+    <div class="language-switch" role="group" aria-label="Language / Langue">
+      <button
+        (click)="setLanguage('en')"
+        [class.active]="lang() === 'en'"
+        [attr.aria-pressed]="lang() === 'en'"
+        aria-label="English"
+      >
+        EN</button
+      ><span aria-hidden="true">/</span
+      ><button
+        (click)="setLanguage('fr')"
+        [class.active]="lang() === 'fr'"
+        [attr.aria-pressed]="lang() === 'fr'"
+        aria-label="Français"
+      >
+        FR
+      </button>
+    </div>
+    <a class="nav-cv" [href]="cv" download
+      ><app-icon name="download" /><span>CV</span></a
+    ><a class="nav-contact" href="#contact">{{ t('Let’s talk') }}</a
+    ><button
+      class="menu-toggle"
+      (click)="menuOpen.set(!menuOpen())"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-nav"
+    >
+      {{ t(menuOpen() ? 'Close' : 'Menu') }}
+      <span aria-hidden="true">{{ menuOpen() ? '−' : '+' }}</span>
+    </button>
+  </div>
+</header>
+@if (menuOpen()) {
+  <nav class="mobile-nav" id="mobile-nav" [attr.aria-label]="t('Menu')">
+    <a href="#work" (click)="navigate()">{{ t('Work') }} <span>01</span></a
+    ><a href="#experience" (click)="navigate()">{{ t('Experience') }} <span>02</span></a
+    ><a href="#skills" (click)="navigate()">{{ t('Skills') }} <span>03</span></a
+    ><a href="#about" (click)="navigate()">{{ t('About') }} <span>04</span></a
+    ><a href="#contact" (click)="navigate()">{{ t('Contact') }} <span>05</span></a
+    ><a [href]="cv" download (click)="navigate()"
+      >{{ t('Download CV (PDF)') }} <app-icon name="download"
+    /></a>
+  </nav>
+}
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero" aria-labelledby="hero-title">
+    <div class="hero-topline">
+      <span class="eyebrow">JASSER NOOMANI — {{ t('Software engineering student') }}</span
+      ><span class="coordinates">TUNIS, TN <span class="location-dot"></span></span>
+    </div>
+    <div class="hero-copy">
+      <p class="status"><span class="status-dot" aria-hidden="true"></span>{{ t('Open to a PFE internship · 2027') }}</p>
+      <h1 id="hero-title">
+        {{ t('Engineering') }}<br />{{ t('what’s') }} <em>{{ t('next.') }}</em
+        ><span class="title-period" aria-hidden="true">*</span>
+      </h1>
+      <p class="hero-description">
+        {{
+          t(
+            'Final-year engineering student at ESPRIT. I build full-stack and mobile applications, integrate local AI models with real safeguards, and test what I ship.'
+          )
+        }}
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#work"
+          >{{ t('Explore my work') }} <app-icon class="button-icon" name="arrow-up-right" /></a
+        ><a class="button button-ghost" [href]="cv" download
+          >{{ t('Download CV') }} <app-icon class="button-icon" name="download"
+        /></a>
+      </div>
+      <dl class="hero-stats">
+        <div>
+          <dt>{{ t('projects') }}</dt>
+          <dd>06</dd>
+        </div>
+        <div>
+          <dt>{{ t('internships') }}</dt>
+          <dd>02</dd>
+        </div>
+        <div>
+          <dt>{{ t('automated tests') }}</dt>
+          <dd>240+</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="hero-art">
+      <app-orbital-scene [paused]="reducedMotion()" /><span class="art-label label-top">{{
+        t('IDEAS INTO SYSTEMS')
+      }}</span
+      ><span class="art-label label-side">{{ t('CONTINUOUS EXPLORATION') }}</span
+      ><span class="art-cross cross-one" aria-hidden="true">+</span
+      ><span class="art-cross cross-two" aria-hidden="true">+</span>
+    </div>
+    <div class="hero-bottom">
+      <a class="scroll-cue" href="#work"
+        ><span class="scroll-line" aria-hidden="true"></span>{{ t('SCROLL TO EXPLORE') }}</a
+      ><span class="drag-cue">{{ t('DRAG THE OBJECT. GET CURIOUS.') }}</span
+      ><button
+        class="motion-toggle"
+        (click)="reducedMotion.set(!reducedMotion())"
+        [attr.aria-pressed]="reducedMotion()"
+        [attr.aria-label]="t('Pause 3D animation')"
+      >
+        <app-icon [name]="reducedMotion() ? 'play' : 'pause'" />{{
+          t(reducedMotion() ? 'Motion off' : 'Motion on')
+        }}
+      </button>
+    </div>
+  </section>
+
+  <div class="tech-strip">
+    <span>{{ t('WHAT I WORK WITH') }}</span>
+    <ul>
+      <li>Java</li><li>Spring Boot</li><li>Angular</li><li>Flutter</li><li>Python</li
+      ><li>Ollama</li><li>Qdrant</li><li>Docker</li>
+    </ul>
+  </div>
+
+  <!-- 01 WORK -->
+  <section id="work" class="section work" aria-labelledby="work-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow"><span>01 /</span>{{ t('SELECTED WORK') }}</p>
+        <h2 id="work-title">
+          {{ t('Ideas, made') }} <em>{{ t('real.') }}</em>
+        </h2>
+      </div>
+      <p>
+        {{ t('Six projects, from AI marketplaces') + ' ' }}<br />{{
+          t('to mobile apps tested on real devices.')
+        }}
+      </p>
+    </div>
+    <div class="work-toolbar">
+      <div class="filters" role="group" [attr.aria-label]="t('Filter projects')">
+        @for (item of filters; track item) {
+          <button
+            (click)="filter.set(item)"
+            [class.active]="filter() === item"
+            [attr.aria-pressed]="filter() === item"
+          >
+            {{ t(item) }}
+          </button>
+        }
+      </div>
+      <span class="work-count" aria-live="polite"
+        >{{ pad(visibleProjects().length) }} / {{ total }} {{ t('PROJECTS') }}</span
+      >
+    </div>
+    <div class="project-grid" [class.filtered]="filter() !== 'All work'">
+      @for (project of visibleProjects(); track project.id) {
+        <article [class]="'project-card size-' + project.size">
+          <button
+            [class]="'project-visual visual-' + project.id"
+            (click)="openProject(project)"
+            [attr.aria-label]="t('Explore') + ' ' + project.name"
+          >
+            <span class="visual-top"
+              ><span>{{ t(project.type) }}</span
+              ><span>{{ project.number }} / {{ total }}</span></span
+            >
+            @switch (project.id) {
+              @case ('ebiessa') {
+                <div class="art ebiessa-art" aria-hidden="true">
+                  <div class="ebiessa-brand">e<span>·</span>biessa<span class="brand-star">✳</span></div>
+                  <p>{{ t('FIND YOUR PERFECT FIT.') }}</p>
+                  <div class="search-demo">
+                    <span class="search-symbol">⌕</span
+                    ><span>{{ t('Find a part that fits my car') }}</span
+                    ><span class="ai-chip">{{ t('AI SEARCH') }}</span>
+                  </div>
+                  <div class="search-nodes">
+                    <span>{{ t('YOUR VEHICLE') }}</span><i></i><span>{{ t('SEMANTIC SEARCH') }}</span
+                    ><i></i><span class="match-node">{{ t('THE RIGHT PART') }}</span>
+                  </div>
+                </div>
+              }
+              @case ('nova') {
+                <div class="art nova-art" aria-hidden="true">
+                  <div class="phone">
+                    <span class="phone-notch"></span>
+                    <span class="phone-title">{{ t('Floor') }} 3</span>
+                    <div class="room-grid">
+                      <i class="r-free">301</i><i class="r-clean">302</i><i class="r-occ">303</i
+                      ><i class="r-free">304</i><i class="r-occ">305</i><i class="r-clean">306</i
+                      ><i class="r-out">307</i><i class="r-free">308</i><i class="r-occ">309</i>
+                    </div>
+                    <span class="phone-bar"></span>
+                  </div>
+                  <div class="nova-side">
+                    <strong>nova<span>paris</span></strong>
+                    <p>{{ t('HOUSEKEEPING, LIVE.') }}</p>
+                    <ul class="legend">
+                      <li><i class="r-free"></i>{{ t('Free') }}</li>
+                      <li><i class="r-clean"></i>{{ t('To clean') }}</li>
+                      <li><i class="r-occ"></i>{{ t('Occupied') }}</li>
+                      <li><i class="r-out"></i>{{ t('Out of order') }}</li>
+                    </ul>
+                    <span class="badge"><app-icon name="check" />43/43 · {{ t('E2E ON DEVICE') }}</span>
+                  </div>
+                </div>
+              }
+              @case ('nirvana') {
+                <div class="art nirvana-art" aria-hidden="true">
+                  <strong class="nirvana-brand">nirvana<span>.</span></strong>
+                  <div class="reco-card">
+                    <span class="reco-label">{{ t('RECOMMENDED FOR YOU') }}</span>
+                    <div class="reco-row"><span class="dish"></span><span class="lines"><i></i><i></i></span><b>✓</b></div>
+                    <div class="reco-row"><span class="dish"></span><span class="lines"><i></i><i></i></span><b>✓</b></div>
+                    <div class="reco-chips">
+                      <span><app-icon name="shield-check" />{{ t('Allergy-safe') }}</span
+                      ><span>{{ t('Local LLM') }}</span><span>{{ t('Rule fallback') }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+              @case ('aletheia') {
+                <div class="art aletheia-art" aria-hidden="true">
+                  <div class="aletheia-symbol">a<span>✳</span></div>
+                  <strong>aletheia</strong><span>{{ t('KNOWLEDGE, CONNECTED.') }}</span>
+                  <div class="learning-orbit orbit-one"></div>
+                  <div class="learning-orbit orbit-two"></div>
+                </div>
+              }
+              @case ('polars') {
+                <div class="art polars-art" aria-hidden="true">
+                  <span class="bench-title">67M ROWS · 9 GB</span>
+                  <div class="bench">
+                    <span>Polars · Rust</span>
+                    <div class="bar bar-fast"><i></i><b>3.7 s</b></div>
+                    <span>PostgreSQL</span>
+                    <div class="bar bar-slow"><i></i><b>15.6 s</b></div>
+                  </div>
+                  <span class="bench-note">{{ t('SAME QUERY · LOWER IS BETTER') }}</span>
+                </div>
+              }
+              @default {
+                <div class="art bledi-art" aria-hidden="true">
+                  <div class="document-stack">
+                    <div></div>
+                    <div></div>
+                    <div>
+                      <span class="doc-emblem">B.</span><span class="doc-line"></span
+                      ><span class="doc-line short"></span><span class="doc-seal">✓</span>
+                    </div>
+                  </div>
+                  <strong>BlediSmart<span>{{ t('CONNECTED MUNICIPAL SERVICES') }}</span></strong>
+                </div>
+              }
+            }
+            <span class="visual-bottom"
+              ><span>{{ t('VIEW CASE STUDY') }}</span
+              ><span class="open-project"><app-icon name="arrow-up-right" /></span
+            ></span>
+          </button>
+          <div class="project-body">
+            <div class="project-heading">
+              <h3>
+                <button (click)="openProject(project)">{{ project.name }}</button>
+              </h3>
+              <span>{{ project.year }}</span>
+            </div>
+            <p class="project-context">{{ t(project.context) }}</p>
+            <p class="project-description">{{ t(project.description) }}</p>
+            @if (project.highlights.length) {
+              <dl class="highlights">
+                @for (h of project.highlights; track h.value) {
+                  <div>
+                    <dt>{{ t(h.label) }}</dt>
+                    <dd>{{ h.value }}</dd>
+                  </div>
+                }
+              </dl>
+            }
+            <ul class="tags">
+              @for (tag of project.tags; track tag) {
+                <li>{{ tag }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+    <a
+      class="github-link"
+      aria-label="Jasser Noomani — GitHub"
+      [href]="github"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><app-icon name="github" /><span>{{ t('More code on GitHub') }}</span
+      ><app-icon name="arrow-up-right"
+    /></a>
+  </section>
+
+  <!-- 02 EXPERIENCE -->
+  <section id="experience" class="section experience" aria-labelledby="experience-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow"><span>02 /</span>{{ t('EXPERIENCE & EDUCATION') }}</p>
+        <h2 id="experience-title">
+          {{ t('Where I’ve') }} <em>{{ t('learned.') }}</em>
+        </h2>
+      </div>
+      <p>
+        {{ t('Two internships, one remote role,') + ' ' }}<br />{{
+          t('and an engineering degree in progress.')
+        }}
+      </p>
+    </div>
+    <div class="timeline-columns">
+      <div>
+        <h3 class="timeline-label">{{ t('EXPERIENCE') }}</h3>
+        <ol class="timeline">
+          @for (item of experience; track item.place) {
+            <li>
+              <span class="period">{{ t(item.period) }}</span>
+              <div>
+                <h4>{{ t(item.role) }}</h4>
+                <p class="place">
+                  {{ item.place }}
+                  @if (item.meta) {
+                    <span> · {{ t(item.meta) }}</span>
+                  }
+                </p>
+                <p>{{ t(item.detail) }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+      <div>
+        <h3 class="timeline-label">{{ t('EDUCATION') }}</h3>
+        <ol class="timeline">
+          @for (item of education; track item.place) {
+            <li>
+              <span class="period">{{ t(item.period) }}</span>
+              <div>
+                <h4>{{ t(item.role) }}</h4>
+                <p class="place">{{ item.place }}</p>
+                <p>{{ t(item.detail) }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 SKILLS -->
+  <section id="skills" class="section expertise" aria-labelledby="skills-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow"><span>03 /</span>{{ t('MY TOOLKIT') }}</p>
+        <h2 id="skills-title">
+          {{ t('The thinking.') }}<br />{{ t('The') }} <em>{{ t('building.') }}</em>
+        </h2>
+      </div>
+      <p>{{ t('From the first API endpoint') + ' ' }}<br />{{ t('to the test that proves it works.') }}</p>
+    </div>
+    <div class="expertise-list">
+      <article>
+        <span class="expertise-icon"><app-icon name="code-slash" /></span>
+        <h3>{{ t('Backend & systems') }}</h3>
+        <p>{{ t('Clear APIs, focused services, and data that stays consistent under real use.') }}</p>
+        <ul class="expertise-tags">
+          <li>Java · Spring Boot</li>
+          <li>Spring Security · JPA · WebSocket</li>
+          <li>Gateway · Eureka · Redis</li>
+          <li>MySQL · PostgreSQL · MongoDB</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="phone" /></span>
+        <h3>{{ t('Mobile apps') }}</h3>
+        <p>
+          {{
+            t(
+              'Flutter apps that keep working offline, migrate data safely, and are tested on real phones.'
+            )
+          }}
+        </p>
+        <ul class="expertise-tags">
+          <li>Flutter · Dart</li>
+          <li>SQLite (sqflite) · {{ t('Versioned migrations') }}</li>
+          <li>{{ t('Android: notifications, camera, QR') }}</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="cpu" /></span>
+        <h3>{{ t('Applied intelligence') }}</h3>
+        <p>
+          {{
+            t(
+              'Local models connected to real product needs, with validated outputs and safe fallbacks.'
+            )
+          }}
+        </p>
+        <ul class="expertise-tags">
+          <li>Python · FastAPI</li>
+          <li>Ollama · Qwen · QLoRA/Unsloth</li>
+          <li>Qdrant · CLIP · scikit-learn</li>
+          <li>Rust · Polars</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="hdd-network" /></span>
+        <h3>{{ t('Quality & delivery') }}</h3>
+        <p>
+          {{ t('Automated tests at every level, repeatable builds, and systems you can observe.') }}
+        </p>
+        <ul class="expertise-tags">
+          <li>JUnit · Mockito · pytest · Playwright</li>
+          <li>Docker · Jenkins · GitHub Actions</li>
+          <li>SonarQube · Prometheus · Grafana</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="window" /></span>
+        <h3>{{ t('Web & interface') }}</h3>
+        <p>{{ t('Responsive interfaces in Angular, from the first mockup to interactive 3D.') }}</p>
+        <ul class="expertise-tags">
+          <li>Angular · TypeScript</li>
+          <li>Three.js · {{ t('Interactive 3D') }}</li>
+          <li>{{ t('Figma prototyping') }}</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 ABOUT -->
+  <section id="about" class="section about" aria-labelledby="about-title">
+    <app-brand-panel
+      [caption]="t('A LITTLE ABOUT THE PERSON')"
+      [roleLabel]="t('Software engineering student')"
+      [locationLabel]="t('TUNISIA → EVERYWHERE')"
+    />
+    <div class="about-copy">
+      <p class="eyebrow"><span>04 /</span>{{ t('BEYOND THE CODE') }}</p>
+      <h2 id="about-title">
+        {{ t('Built on curiosity.') }}<br />{{ t('Driven by') }} <em>{{ t('purpose.') }}</em>
+      </h2>
+      <p>
+        {{
+          t(
+            'I’m Jasser, a final-year software engineering student at ESPRIT in Tunis. I like understanding how things work, then making them work better.'
+          )
+        }}
+      </p>
+      <p>
+        {{
+          t(
+            'My work sits between backend engineering, mobile development and applied AI. I care about clear architecture, honest measurements, and the details that turn a working application into a dependable one.'
+          )
+        }}
+      </p>
+      <dl class="about-facts">
+        <div>
+          <dt>{{ t('CURRENTLY') }}</dt>
+          <dd>
+            <strong>{{ t('Final-year engineering student') }}</strong><small>ESPRIT, Tunis</small>
+          </dd>
+        </div>
+        <div>
+          <dt>{{ t('LOOKING FOR') }}</dt>
+          <dd>
+            <strong>{{ t('A PFE internship') }}</strong
+            ><small>{{ t('4–6 months · from early 2027') }}</small>
+          </dd>
+        </div>
+        <div class="languages">
+          <dt>{{ t('LANGUAGES') }}</dt>
+          <dd>
+            <span>{{ t('Arabic') }} <small>{{ t('Native') }}</small></span
+            ><span>{{ t('French') }} <small>B2</small></span
+            ><span>{{ t('English') }} <small>B2</small></span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 05 CONTACT -->
+  <section id="contact" class="section contact" aria-labelledby="contact-title">
+    <div class="contact-top">
+      <p class="eyebrow"><span>05 /</span>{{ t('YOUR NEXT PROJECT STARTS HERE') }}</p>
+      <span class="contact-asterisk" aria-hidden="true">✳</span>
+    </div>
+    <h2 id="contact-title">
+      {{ t('Let’s build') }}<br />{{ t('something') }} <em>{{ t('great.') }}</em>
+    </h2>
+    <div class="contact-bottom">
+      <div>
+        <p>
+          {{ t('An internship, a project, or a good conversation.') + ' ' }}<br />{{
+            t('I’d love to hear from you.')
+          }}
+        </p>
+        <div class="email-row">
+          <a [href]="'mailto:' + email"><app-icon name="envelope" />{{ email }}</a
+          ><button
+            (click)="copyEmail()"
+            [attr.aria-label]="t(copied() ? 'Email copied' : 'Copy email address')"
+          >
+            <app-icon [name]="copied() ? 'check' : 'copy'" />
+          </button>
+        </div>
+        <span class="copy-feedback" aria-live="polite">{{
+          copied()
+            ? t('Email copied to clipboard.')
+            : copyError()
+              ? t('Please select the email address to copy it.')
+              : ''
+        }}</span>
+      </div>
+      <div class="contact-socials">
+        <a
+          [href]="linkedin"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Jasser Noomani — LinkedIn"
+          ><app-icon name="linkedin" /><span>LinkedIn</span><app-icon name="arrow-up-right"
+        /></a
+        ><a
+          [href]="github"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Jasser Noomani — GitHub"
+          ><app-icon name="github" /><span>GitHub</span><app-icon name="arrow-up-right" /></a
+        ><a [href]="cv" download
+          ><app-icon name="download" /><span>{{ t('Download CV (PDF)') }}</span
+          ><app-icon name="arrow-up-right"
+        /></a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <a class="wordmark" href="#home" [attr.aria-label]="t('Back to top')"
+    ><img src="brand-mark.svg" width="40" height="40" alt="" /><span class="wordmark-name"
+      >Jasser<span>Noomani</span></span
+    ></a
+  ><span>© {{ year }} Jasser Noomani</span
+  ><span class="footer-note">{{ t('BUILT WITH INTENTION. AND A LITTLE CURIOSITY.') }}</span
+  ><a class="to-top" href="#home">{{ t('Back to top') }} <app-icon name="arrow-up" /></a>
+</footer>
+<dialog
+  #projectDialog
+  class="project-dialog"
+  (click)="closeOnBackdrop($event)"
+  (close)="onDialogClose()"
+  aria-labelledby="dialog-title"
+>
+  <div class="dialog-inner">
+    <button
+      class="dialog-close"
+      (click)="closeProject()"
+      [attr.aria-label]="t('Close project details')"
+      autofocus
+    >
+      ×
+    </button>
+    @if (selectedProject(); as project) {
+      <p class="eyebrow">{{ project.number }} / {{ t(project.type) }}</p>
+      <h2 id="dialog-title">{{ project.name }}</h2>
+      <p class="dialog-subtitle">{{ t(project.subtitle) }}</p>
+      <p class="dialog-context">{{ t(project.context) }} · {{ project.year }}</p>
+      <ul class="tags">
+        @for (tag of project.tags; track tag) {
+          <li>{{ tag }}</li>
+        }
+      </ul>
+      @if (project.highlights.length) {
+        <h3>{{ t('Key results') }}</h3>
+        <dl class="highlights dialog-highlights">
+          @for (h of project.highlights; track h.value) {
+            <div>
+              <dt>{{ t(h.label) }}</dt>
+              <dd>{{ h.value }}</dd>
+            </div>
+          }
+        </dl>
+      }
+      <h3>{{ t('The challenge') }}</h3>
+      <p>{{ t(project.challenge) }}</p>
+      <h3>{{ t('What I built') }}</h3>
+      <ul class="contributions">
+        @for (contribution of project.contributions; track contribution) {
+          <li>{{ t(contribution) }}</li>
+        }
+      </ul>
+      <p class="project-scope">{{ t(project.scope) }}</p>
+      <a class="button button-primary" href="#contact" (click)="closeProject()"
+        >{{ t('Let’s talk about it') }} <app-icon name="arrow-up-right"
+      /></a>
+    }
+  </div>
+</dialog>

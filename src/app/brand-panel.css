@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  height: 100%;
+}
+.about-art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 520px;
+  padding: 30px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 30%, #b8f1ff 0 6%, #3fd8ff55 14%, transparent 34%),
+    linear-gradient(160deg, #1452ff 0%, #0a2690 45%, #041244 100%);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%);
+}
+.about-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(-24deg, transparent 58%, #3fd8ff44 58% 61%, transparent 61%),
+    linear-gradient(-24deg, transparent 68%, #f2f9ff33 68% 69%, transparent 69%),
+    repeating-linear-gradient(transparent 0 22px, #b8f1ff0d 22px 23px);
+  pointer-events: none;
+}
+.about-art > * {
+  position: relative;
+  z-index: 1;
+}
+.eyebrow {
+  align-self: flex-start;
+  padding: 3px 12px;
+  background: #020b2e;
+  color: #3fd8ff;
+  font: italic 700 13px/1.4 var(--ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: skewX(-12deg);
+}
+.monogram-art {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 0;
+}
+.monogram-art img {
+  width: min(70%, 270px);
+  height: auto;
+  filter: drop-shadow(10px 12px 0 #020b2e) drop-shadow(0 0 30px #3fd8ff88);
+}
+.signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font: 400 30px/1 var(--display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f2f9ff;
+  transform: skewX(-8deg);
+}
+.signature span {
+  padding: 3px 12px;
+  background: #3fd8ff;
+  color: #020b2e;
+  font: italic 800 14px var(--ui);
+  letter-spacing: 0.18em;
+}
+.about-art-bottom {
+  display: flex;
+  justify-content: space-between;
+  font: italic 700 13px var(--ui);
+  letter-spacing: 0.12em;
+  color: #b8f1ff;
+}
+@media (max-width: 760px) {
+  .about-art {
+    min-height: 440px;
+    padding: 24px;
+  }
+  .signature {
+    font-size: 24px;
+  }
+}

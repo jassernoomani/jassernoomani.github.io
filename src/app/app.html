@@ -1,344 +1,634 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style>
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
-
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
-
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
-
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
-
-    --pill-accent: var(--bright-blue);
-
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: block;
-    height: 100dvh;
-  }
-
-  h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 500;
-    line-height: 100%;
-    letter-spacing: -0.125rem;
-    margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-  }
-
-  p {
-    margin: 0;
-    color: var(--gray-700);
-  }
-
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
-
-  .angular-logo {
-    max-width: 9.2rem;
-  }
-
-  .content {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 3rem;
-  }
-
-  .content h1 {
-    margin-top: 1.75rem;
-  }
-
-  .content p {
-    margin-top: 1.5rem;
-  }
-
-  .divider {
-    width: 1px;
-    background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
-  }
-
-  .pill-group {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-  }
-
-  .pill {
-    display: flex;
-    align-items: center;
-    --pill-accent: var(--bright-blue);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
-    color: var(--pill-accent);
-    padding-inline: 0.75rem;
-    padding-block: 0.375rem;
-    border-radius: 2.75rem;
-    border: 0;
-    transition: background 0.3s ease;
-    font-family: var(--inter-font);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.4rem;
-    letter-spacing: -0.00875rem;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .pill:hover {
-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
-  }
-
-  .pill-group .pill:nth-child(6n + 1) {
-    --pill-accent: var(--bright-blue);
-  }
-  .pill-group .pill:nth-child(6n + 2) {
-    --pill-accent: var(--electric-violet);
-  }
-  .pill-group .pill:nth-child(6n + 3) {
-    --pill-accent: var(--french-violet);
-  }
-
-  .pill-group .pill:nth-child(6n + 4),
-  .pill-group .pill:nth-child(6n + 5),
-  .pill-group .pill:nth-child(6n + 6) {
-    --pill-accent: var(--hot-red);
-  }
-
-  .pill-group svg {
-    margin-inline-start: 0.25rem;
-  }
-
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: 0.73rem;
-    margin-top: 1.5rem;
-  }
-
-  .social-links path {
-    transition: fill 0.3s ease;
-    fill: var(--gray-400);
-  }
-
-  .social-links a:hover svg path {
-    fill: var(--gray-900);
-  }
-
-  @media screen and (max-width: 650px) {
-    .content {
-      flex-direction: column;
-      width: max-content;
-    }
-
-    .divider {
-      height: 1px;
-      width: 100%;
-      background: var(--red-to-pink-to-purple-horizontal-gradient);
-      margin-block: 1.5rem;
-    }
-  }
-</style>
-
-<main class="main">
-  <div class="content">
-    <div class="left-side">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 982 239"
-        fill="none"
-        class="angular-logo"
+<a class="skip-link" href="#work">{{ t('Skip to selected work') }}</a>
+<header class="header">
+  <a class="wordmark" href="#home" aria-label="Jasser Noomani" (click)="navigate()"
+    ><img src="brand-mark.svg" width="42" height="42" alt="" /><span class="wordmark-name"
+      >Jasser<span>Noomani</span></span
+    ></a
+  >
+  <nav class="desktop-nav" [attr.aria-label]="t('Menu')">
+    <a href="#work"><i>01</i>{{ t('Work') }}</a
+    ><a href="#experience"><i>02</i>{{ t('Experience') }}</a
+    ><a href="#skills"><i>03</i>{{ t('Skills') }}</a
+    ><a href="#about"><i>04</i>{{ t('About') }}</a>
+  </nav>
+  <div class="header-right">
+    <div class="language-switch" role="group" aria-label="Language / Langue">
+      <button
+        (click)="setLanguage('en')"
+        [class.active]="lang() === 'en'"
+        [attr.aria-pressed]="lang() === 'en'"
+        aria-label="English"
       >
-        <g clip-path="url(#a)">
-          <path
-            fill="url(#b)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-          <path
-            fill="url(#c)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-        </g>
-        <defs>
-          <radialGradient
-            id="c"
-            cx="0"
-            cy="0"
-            r="1"
-            gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#FF41F8" />
-            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
-            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
-          </radialGradient>
-          <linearGradient
-            id="b"
-            x1="0"
-            x2="982"
-            y1="192"
-            y2="192"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#F0060B" />
-            <stop offset="0" stop-color="#F0070C" />
-            <stop offset=".526" stop-color="#CC26D5" />
-            <stop offset="1" stop-color="#7702FF" />
-          </linearGradient>
-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
-        </defs>
-      </svg>
-      <h1>Hello, {{ title() }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+        EN</button
+      ><button
+        (click)="setLanguage('fr')"
+        [class.active]="lang() === 'fr'"
+        [attr.aria-pressed]="lang() === 'fr'"
+        aria-label="Français"
+      >
+        FR
+      </button>
     </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-      <div class="pill-group">
-        @for (item of [
-          { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai'},
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
-        ]; track item.title) {
-          <a
-            class="pill"
-            [href]="item.link"
-            target="_blank"
-            rel="noopener"
-          >
-            <span>{{ item.title }}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="14"
-              viewBox="0 -960 960 960"
-              width="14"
-              fill="currentColor"
-            >
-              <path
-                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
-              />
-            </svg>
-          </a>
-        }
+    <a class="nav-cv" [href]="cv" download><app-icon name="download" /><span>CV</span></a
+    ><a class="nav-contact" href="#contact"><span>{{ t('Let’s talk') }}</span></a
+    ><button
+      class="menu-toggle"
+      (click)="menuOpen.set(!menuOpen())"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-nav"
+    >
+      <span>{{ t(menuOpen() ? 'Close' : 'Menu') }}</span>
+      <i aria-hidden="true">{{ menuOpen() ? '−' : '+' }}</i>
+    </button>
+  </div>
+</header>
+@if (menuOpen()) {
+  <nav class="mobile-nav" id="mobile-nav" [attr.aria-label]="t('Menu')">
+    <a href="#work" (click)="navigate()"><i>01</i>{{ t('Work') }}</a
+    ><a href="#experience" (click)="navigate()"><i>02</i>{{ t('Experience') }}</a
+    ><a href="#skills" (click)="navigate()"><i>03</i>{{ t('Skills') }}</a
+    ><a href="#about" (click)="navigate()"><i>04</i>{{ t('About') }}</a
+    ><a href="#contact" (click)="navigate()"><i>05</i>{{ t('Contact') }}</a
+    ><a class="mobile-cv" [href]="cv" download (click)="navigate()"
+      ><app-icon name="download" />{{ t('Download CV (PDF)') }}</a
+    >
+  </nav>
+}
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero" aria-labelledby="hero-title">
+    <div class="tide" aria-hidden="true">
+      <span class="moon"></span>
+      <span class="slash slash-a"></span><span class="slash slash-b"></span
+      ><span class="slash slash-c"></span>
+      <span class="caustics"></span>
+      <span class="bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+    <div class="hero-topline">
+      <span class="eyebrow">JASSER NOOMANI <b>//</b> {{ t('Software engineering student') }}</span
+      ><span class="coordinates"><span class="location-dot"></span>TUNIS, TN</span>
+    </div>
+    <div class="hero-copy">
+      <p class="status">
+        <span class="status-dot" aria-hidden="true"></span
+        ><span>{{ t('Open to a PFE internship · 2027') }}</span>
+      </p>
+      <h1 id="hero-title">
+        <span class="h1-line">{{ t('Engineering') }}</span
+        ><span class="h1-line">{{ t('what’s') }}</span
+        ><span class="h1-line h1-accent"><em>{{ t('next.') }}</em></span>
+      </h1>
+      <p class="hero-description">
+        {{
+          t(
+            'Final-year engineering student at ESPRIT. I build full-stack and mobile applications, integrate local AI models with real safeguards, and test what I ship.'
+          )
+        }}
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#work"
+          ><span>{{ t('Explore my work') }}</span> <app-icon class="button-icon" name="arrow-up-right" /></a
+        ><a class="button button-ghost" [href]="cv" download
+          ><span>{{ t('Download CV') }}</span> <app-icon class="button-icon" name="download"
+        /></a>
       </div>
-      <div class="social-links">
-        <a
-          href="https://github.com/angular/angular"
-          aria-label="Github"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Github"
-          >
-            <path
-              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://x.com/angular"
-          aria-label="X"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="X"
-          >
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
-          aria-label="Youtube"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="29"
-            height="20"
-            viewBox="0 0 29 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Youtube"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
-            />
-          </svg>
-        </a>
-      </div>
+      <dl class="hero-stats">
+        <div>
+          <dt>{{ t('projects') }}</dt>
+          <dd>06</dd>
+        </div>
+        <div>
+          <dt>{{ t('internships') }}</dt>
+          <dd>02</dd>
+        </div>
+        <div>
+          <dt>{{ t('automated tests') }}</dt>
+          <dd>240+</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="hero-art">
+      <app-orbital-scene [paused]="reducedMotion()" /><span class="art-label label-top">{{
+        t('IDEAS INTO SYSTEMS')
+      }}</span
+      ><span class="art-label label-side">{{ t('CONTINUOUS EXPLORATION') }}</span>
+    </div>
+    <div class="hero-bottom">
+      <a class="scroll-cue" href="#work"
+        ><span class="scroll-line" aria-hidden="true"></span>{{ t('SCROLL TO EXPLORE') }}</a
+      ><span class="drag-cue">{{ t('DRAG THE OBJECT. GET CURIOUS.') }}</span
+      ><button
+        class="motion-toggle"
+        (click)="reducedMotion.set(!reducedMotion())"
+        [attr.aria-pressed]="reducedMotion()"
+        [attr.aria-label]="t('Pause 3D animation')"
+      >
+        <app-icon [name]="reducedMotion() ? 'play' : 'pause'" /><span>{{
+          t(reducedMotion() ? 'Motion off' : 'Motion on')
+        }}</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="tech-strip">
+    <span class="strip-tag"><span>{{ t('WHAT I WORK WITH') }}</span></span>
+    <div class="marquee">
+      <ul>
+        <li>Java</li><li>Spring Boot</li><li>Angular</li><li>Flutter</li><li>Python</li
+        ><li>FastAPI</li><li>Ollama</li><li>Qdrant</li><li>Rust</li><li>Docker</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Java</li><li>Spring Boot</li><li>Angular</li><li>Flutter</li><li>Python</li
+        ><li>FastAPI</li><li>Ollama</li><li>Qdrant</li><li>Rust</li><li>Docker</li>
+      </ul>
     </div>
   </div>
+
+  <!-- 01 WORK -->
+  <section id="work" class="section work" aria-labelledby="work-title">
+    <span class="section-index" aria-hidden="true">01</span>
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow"><span>01</span>{{ t('SELECTED WORK') }}</p>
+        <h2 id="work-title">
+          {{ t('Ideas, made') }} <em>{{ t('real.') }}</em>
+        </h2>
+      </div>
+      <p>
+        {{ t('Six projects, from AI marketplaces') + ' ' }}<br />{{
+          t('to mobile apps tested on real devices.')
+        }}
+      </p>
+    </div>
+    <div class="work-toolbar">
+      <div class="filters" role="group" [attr.aria-label]="t('Filter projects')">
+        @for (item of filters; track item) {
+          <button
+            (click)="filter.set(item)"
+            [class.active]="filter() === item"
+            [attr.aria-pressed]="filter() === item"
+          >
+            <span>{{ t(item) }}</span>
+          </button>
+        }
+      </div>
+      <span class="work-count" aria-live="polite"
+        >{{ pad(visibleProjects().length) }} / {{ total }} {{ t('PROJECTS') }}</span
+      >
+    </div>
+    <div class="project-grid" [class.filtered]="filter() !== 'All work'">
+      @for (project of visibleProjects(); track project.id) {
+        <article [class]="'project-card size-' + project.size">
+          <button
+            [class]="'project-visual visual-' + project.id"
+            (click)="openProject(project)"
+            [attr.aria-label]="t('Explore') + ' ' + project.name"
+          >
+            <span class="visual-top"
+              ><span>{{ t(project.type) }}</span
+              ><span class="visual-number">{{ project.number }}</span></span
+            >
+            @switch (project.id) {
+              @case ('ebiessa') {
+                <div class="art ebiessa-art" aria-hidden="true">
+                  <div class="ebiessa-brand">e<span>·</span>biessa<span class="brand-star">✳</span></div>
+                  <p>{{ t('FIND YOUR PERFECT FIT.') }}</p>
+                  <div class="search-demo">
+                    <span class="search-symbol">⌕</span
+                    ><span>{{ t('Find a part that fits my car') }}</span
+                    ><span class="ai-chip">{{ t('AI SEARCH') }}</span>
+                  </div>
+                  <div class="search-nodes">
+                    <span>{{ t('YOUR VEHICLE') }}</span><i></i><span>{{ t('SEMANTIC SEARCH') }}</span
+                    ><i></i><span class="match-node">{{ t('THE RIGHT PART') }}</span>
+                  </div>
+                </div>
+              }
+              @case ('nova') {
+                <div class="art nova-art" aria-hidden="true">
+                  <div class="phone">
+                    <span class="phone-notch"></span>
+                    <span class="phone-title">{{ t('Floor') }} 3</span>
+                    <div class="room-grid">
+                      <i class="r-free">301</i><i class="r-clean">302</i><i class="r-occ">303</i
+                      ><i class="r-free">304</i><i class="r-occ">305</i><i class="r-clean">306</i
+                      ><i class="r-out">307</i><i class="r-free">308</i><i class="r-occ">309</i>
+                    </div>
+                    <span class="phone-bar"></span>
+                  </div>
+                  <div class="nova-side">
+                    <strong>nova<span>paris</span></strong>
+                    <p>{{ t('HOUSEKEEPING, LIVE.') }}</p>
+                    <ul class="legend">
+                      <li><i class="r-free"></i>{{ t('Free') }}</li>
+                      <li><i class="r-clean"></i>{{ t('To clean') }}</li>
+                      <li><i class="r-occ"></i>{{ t('Occupied') }}</li>
+                      <li><i class="r-out"></i>{{ t('Out of order') }}</li>
+                    </ul>
+                    <span class="badge"><app-icon name="check" />43/43 · {{ t('E2E ON DEVICE') }}</span>
+                  </div>
+                </div>
+              }
+              @case ('nirvana') {
+                <div class="art nirvana-art" aria-hidden="true">
+                  <strong class="nirvana-brand">nirvana<span>.</span></strong>
+                  <div class="reco-card">
+                    <span class="reco-label">{{ t('RECOMMENDED FOR YOU') }}</span>
+                    <div class="reco-row"><span class="dish"></span><span class="lines"><i></i><i></i></span><b>✓</b></div>
+                    <div class="reco-row"><span class="dish"></span><span class="lines"><i></i><i></i></span><b>✓</b></div>
+                    <div class="reco-chips">
+                      <span><app-icon name="shield-check" />{{ t('Allergy-safe') }}</span
+                      ><span>{{ t('Local LLM') }}</span><span>{{ t('Rule fallback') }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+              @case ('aletheia') {
+                <div class="art aletheia-art" aria-hidden="true">
+                  <div class="aletheia-symbol">a<span>✳</span></div>
+                  <strong>aletheia</strong><span>{{ t('KNOWLEDGE, CONNECTED.') }}</span>
+                  <div class="learning-orbit orbit-one"></div>
+                  <div class="learning-orbit orbit-two"></div>
+                </div>
+              }
+              @case ('polars') {
+                <div class="art polars-art" aria-hidden="true">
+                  <span class="bench-title">67M ROWS · 9 GB</span>
+                  <div class="bench">
+                    <span>Polars · Rust</span>
+                    <div class="bar bar-fast"><i></i><b>3.7 s</b></div>
+                    <span>PostgreSQL</span>
+                    <div class="bar bar-slow"><i></i><b>15.6 s</b></div>
+                  </div>
+                  <span class="bench-note">{{ t('SAME QUERY · LOWER IS BETTER') }}</span>
+                </div>
+              }
+              @default {
+                <div class="art bledi-art" aria-hidden="true">
+                  <div class="document-stack">
+                    <div></div>
+                    <div></div>
+                    <div>
+                      <span class="doc-emblem">B.</span><span class="doc-line"></span
+                      ><span class="doc-line short"></span><span class="doc-seal">✓</span>
+                    </div>
+                  </div>
+                  <strong>BlediSmart<span>{{ t('CONNECTED MUNICIPAL SERVICES') }}</span></strong>
+                </div>
+              }
+            }
+            <span class="visual-bottom"
+              ><span>{{ t('VIEW CASE STUDY') }}</span
+              ><span class="open-project"><app-icon name="arrow-up-right" /></span
+            ></span>
+          </button>
+          <div class="project-body">
+            <div class="project-heading">
+              <h3>
+                <button (click)="openProject(project)">{{ project.name }}</button>
+              </h3>
+              <span>{{ project.year }}</span>
+            </div>
+            <p class="project-context">{{ t(project.context) }}</p>
+            <p class="project-description">{{ t(project.description) }}</p>
+            @if (project.highlights.length) {
+              <dl class="highlights">
+                @for (h of project.highlights; track h.value) {
+                  <div>
+                    <dt>{{ t(h.label) }}</dt>
+                    <dd>{{ h.value }}</dd>
+                  </div>
+                }
+              </dl>
+            }
+            <ul class="tags">
+              @for (tag of project.tags; track tag) {
+                <li>{{ tag }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+    <a
+      class="github-link"
+      aria-label="Jasser Noomani — GitHub"
+      [href]="github"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><app-icon name="github" /><span>{{ t('More code on GitHub') }}</span
+      ><app-icon name="arrow-up-right"
+    /></a>
+  </section>
+
+  <!-- 02 EXPERIENCE -->
+  <section id="experience" class="section experience" aria-labelledby="experience-title">
+    <span class="section-index" aria-hidden="true">02</span>
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow"><span>02</span>{{ t('EXPERIENCE & EDUCATION') }}</p>
+        <h2 id="experience-title">
+          {{ t('Where I’ve') }} <em>{{ t('learned.') }}</em>
+        </h2>
+      </div>
+      <p>
+        {{ t('Two internships, one remote role,') + ' ' }}<br />{{
+          t('and an engineering degree in progress.')
+        }}
+      </p>
+    </div>
+    <div class="timeline-columns">
+      <div>
+        <h3 class="timeline-label"><span>{{ t('EXPERIENCE') }}</span></h3>
+        <ol class="timeline">
+          @for (item of experience; track item.place) {
+            <li>
+              <span class="period">{{ t(item.period) }}</span>
+              <div>
+                <h4>{{ t(item.role) }}</h4>
+                <p class="place">
+                  {{ item.place }}
+                  @if (item.meta) {
+                    <span> · {{ t(item.meta) }}</span>
+                  }
+                </p>
+                <p>{{ t(item.detail) }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+      <div>
+        <h3 class="timeline-label"><span>{{ t('EDUCATION') }}</span></h3>
+        <ol class="timeline">
+          @for (item of education; track item.place) {
+            <li>
+              <span class="period">{{ t(item.period) }}</span>
+              <div>
+                <h4>{{ t(item.role) }}</h4>
+                <p class="place">{{ item.place }}</p>
+                <p>{{ t(item.detail) }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 SKILLS -->
+  <section id="skills" class="section expertise" aria-labelledby="skills-title">
+    <span class="section-index" aria-hidden="true">03</span>
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow"><span>03</span>{{ t('MY TOOLKIT') }}</p>
+        <h2 id="skills-title">
+          {{ t('The thinking.') }}<br />{{ t('The') }} <em>{{ t('building.') }}</em>
+        </h2>
+      </div>
+      <p>{{ t('From the first API endpoint') + ' ' }}<br />{{ t('to the test that proves it works.') }}</p>
+    </div>
+    <div class="expertise-list">
+      <article>
+        <span class="expertise-icon"><app-icon name="code-slash" /></span>
+        <h3>{{ t('Backend & systems') }}</h3>
+        <p>{{ t('Clear APIs, focused services, and data that stays consistent under real use.') }}</p>
+        <ul class="expertise-tags">
+          <li>Java · Spring Boot</li>
+          <li>Spring Security · JPA · WebSocket</li>
+          <li>Gateway · Eureka · Redis</li>
+          <li>MySQL · PostgreSQL · MongoDB</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="phone" /></span>
+        <h3>{{ t('Mobile apps') }}</h3>
+        <p>
+          {{
+            t(
+              'Flutter apps that keep working offline, migrate data safely, and are tested on real phones.'
+            )
+          }}
+        </p>
+        <ul class="expertise-tags">
+          <li>Flutter · Dart</li>
+          <li>SQLite (sqflite) · {{ t('Versioned migrations') }}</li>
+          <li>{{ t('Android: notifications, camera, QR') }}</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="cpu" /></span>
+        <h3>{{ t('Applied intelligence') }}</h3>
+        <p>
+          {{
+            t(
+              'Local models connected to real product needs, with validated outputs and safe fallbacks.'
+            )
+          }}
+        </p>
+        <ul class="expertise-tags">
+          <li>Python · FastAPI</li>
+          <li>Ollama · Qwen · QLoRA/Unsloth</li>
+          <li>Qdrant · CLIP · scikit-learn</li>
+          <li>Rust · Polars</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="hdd-network" /></span>
+        <h3>{{ t('Quality & delivery') }}</h3>
+        <p>
+          {{ t('Automated tests at every level, repeatable builds, and systems you can observe.') }}
+        </p>
+        <ul class="expertise-tags">
+          <li>JUnit · Mockito · pytest · Playwright</li>
+          <li>Docker · Jenkins · GitHub Actions</li>
+          <li>SonarQube · Prometheus · Grafana</li>
+        </ul>
+      </article>
+      <article>
+        <span class="expertise-icon"><app-icon name="window" /></span>
+        <h3>{{ t('Web & interface') }}</h3>
+        <p>{{ t('Responsive interfaces in Angular, from the first mockup to interactive 3D.') }}</p>
+        <ul class="expertise-tags">
+          <li>Angular · TypeScript</li>
+          <li>Three.js · {{ t('Interactive 3D') }}</li>
+          <li>{{ t('Figma prototyping') }}</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 ABOUT -->
+  <section id="about" class="section about" aria-labelledby="about-title">
+    <span class="section-index" aria-hidden="true">04</span>
+    <app-brand-panel
+      [caption]="t('A LITTLE ABOUT THE PERSON')"
+      [roleLabel]="t('Software engineering student')"
+      [locationLabel]="t('TUNISIA → EVERYWHERE')"
+    />
+    <div class="about-copy">
+      <p class="eyebrow"><span>04</span>{{ t('BEYOND THE CODE') }}</p>
+      <h2 id="about-title">
+        {{ t('Built on curiosity.') }}<br />{{ t('Driven by') }} <em>{{ t('purpose.') }}</em>
+      </h2>
+      <p>
+        {{
+          t(
+            'I’m Jasser, a final-year software engineering student at ESPRIT in Tunis. I like understanding how things work, then making them work better.'
+          )
+        }}
+      </p>
+      <p>
+        {{
+          t(
+            'My work sits between backend engineering, mobile development and applied AI. I care about clear architecture, honest measurements, and the details that turn a working application into a dependable one.'
+          )
+        }}
+      </p>
+      <dl class="about-facts">
+        <div>
+          <dt>{{ t('CURRENTLY') }}</dt>
+          <dd>
+            <strong>{{ t('Final-year engineering student') }}</strong><small>ESPRIT, Tunis</small>
+          </dd>
+        </div>
+        <div>
+          <dt>{{ t('LOOKING FOR') }}</dt>
+          <dd>
+            <strong>{{ t('A PFE internship') }}</strong
+            ><small>{{ t('4–6 months · from early 2027') }}</small>
+          </dd>
+        </div>
+        <div class="languages">
+          <dt>{{ t('LANGUAGES') }}</dt>
+          <dd>
+            <span>{{ t('Arabic') }} <small>{{ t('Native') }}</small></span
+            ><span>{{ t('French') }} <small>B2</small></span
+            ><span>{{ t('English') }} <small>B2</small></span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 05 CONTACT -->
+  <section id="contact" class="section contact" aria-labelledby="contact-title">
+    <div class="contact-tide" aria-hidden="true">
+      <span class="moon moon-small"></span><span class="slash slash-a"></span
+      ><span class="slash slash-b"></span>
+    </div>
+    <div class="contact-top">
+      <p class="eyebrow"><span>05</span>{{ t('YOUR NEXT PROJECT STARTS HERE') }}</p>
+      <span class="contact-asterisk" aria-hidden="true">✳</span>
+    </div>
+    <h2 id="contact-title">
+      <span class="h1-line">{{ t('Let’s build') }}</span
+      ><span class="h1-line">{{ t('something') }} <em>{{ t('great.') }}</em></span>
+    </h2>
+    <div class="contact-bottom">
+      <div>
+        <p>
+          {{ t('An internship, a project, or a good conversation.') + ' ' }}<br />{{
+            t('I’d love to hear from you.')
+          }}
+        </p>
+        <div class="email-row">
+          <a [href]="'mailto:' + email"><app-icon name="envelope" /><span>{{ email }}</span></a
+          ><button
+            (click)="copyEmail()"
+            [attr.aria-label]="t(copied() ? 'Email copied' : 'Copy email address')"
+          >
+            <app-icon [name]="copied() ? 'check' : 'copy'" />
+          </button>
+        </div>
+        <span class="copy-feedback" aria-live="polite">{{
+          copied()
+            ? t('Email copied to clipboard.')
+            : copyError()
+              ? t('Please select the email address to copy it.')
+              : ''
+        }}</span>
+      </div>
+      <div class="contact-socials">
+        <a
+          [href]="linkedin"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Jasser Noomani — LinkedIn"
+          ><app-icon name="linkedin" /><span>LinkedIn</span><app-icon name="arrow-up-right"
+        /></a
+        ><a
+          [href]="github"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Jasser Noomani — GitHub"
+          ><app-icon name="github" /><span>GitHub</span><app-icon name="arrow-up-right" /></a
+        ><a [href]="cv" download
+          ><app-icon name="download" /><span>{{ t('Download CV (PDF)') }}</span
+          ><app-icon name="arrow-up-right"
+        /></a>
+      </div>
+    </div>
+  </section>
 </main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<router-outlet />
+<footer>
+  <a class="wordmark" href="#home" [attr.aria-label]="t('Back to top')"
+    ><img src="brand-mark.svg" width="38" height="38" alt="" /><span class="wordmark-name"
+      >Jasser<span>Noomani</span></span
+    ></a
+  ><span>© {{ year }} Jasser Noomani</span
+  ><span class="footer-note">{{ t('BUILT WITH INTENTION. AND A LITTLE CURIOSITY.') }}</span
+  ><a class="to-top" href="#home">{{ t('Back to top') }} <app-icon name="arrow-up" /></a>
+</footer>
+<dialog
+  #projectDialog
+  class="project-dialog"
+  (click)="closeOnBackdrop($event)"
+  (close)="onDialogClose()"
+  aria-labelledby="dialog-title"
+>
+  <div class="dialog-inner">
+    <button
+      class="dialog-close"
+      (click)="closeProject()"
+      [attr.aria-label]="t('Close project details')"
+      autofocus
+    >
+      ×
+    </button>
+    @if (selectedProject(); as project) {
+      <p class="eyebrow"><span>{{ project.number }}</span>{{ t(project.type) }}</p>
+      <h2 id="dialog-title">{{ project.name }}</h2>
+      <p class="dialog-subtitle">{{ t(project.subtitle) }}</p>
+      <p class="dialog-context">{{ t(project.context) }} · {{ project.year }}</p>
+      <ul class="tags">
+        @for (tag of project.tags; track tag) {
+          <li>{{ tag }}</li>
+        }
+      </ul>
+      @if (project.highlights.length) {
+        <h3>{{ t('Key results') }}</h3>
+        <dl class="highlights dialog-highlights">
+          @for (h of project.highlights; track h.value) {
+            <div>
+              <dt>{{ t(h.label) }}</dt>
+              <dd>{{ h.value }}</dd>
+            </div>
+          }
+        </dl>
+      }
+      <h3>{{ t('The challenge') }}</h3>
+      <p>{{ t(project.challenge) }}</p>
+      <h3>{{ t('What I built') }}</h3>
+      <ul class="contributions">
+        @for (contribution of project.contributions; track contribution) {
+          <li>{{ t(contribution) }}</li>
+        }
+      </ul>
+      <p class="project-scope">{{ t(project.scope) }}</p>
+      <a class="button button-primary" href="#contact" (click)="closeProject()"
+        ><span>{{ t('Let’s talk about it') }}</span> <app-icon name="arrow-up-right"
+      /></a>
+    }
+  </div>
+</dialog>
