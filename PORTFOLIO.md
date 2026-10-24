@@ -26,7 +26,7 @@ Sections, in order: Hero (availability, CV download, key figures) → 01 Work �
 - `src/app/portfolio.data.ts`: **all content** — projects (with key results), experience, education, and every English/French string. Edit text here, not in the template.
 - `src/app/app.html`: page structure, project illustrations, and the project dialog.
 - `src/app/app.css`: one consolidated stylesheet (shared primitives → sections → project visuals → responsive). Colour tokens live in `src/styles.css`.
-- `src/app/player-card.*`: the hero "engineer profile" card (tilts with the mouse, floats, pauses with the Motion button). **Your photo goes in `public/photo.jpg`**; it is shown in a blue duotone automatically, and the JN monogram appears until the file exists. Card numbers live in `cardStats` in `app.ts`.
+- `src/app/player-card.*`: the hero "engineer profile" card (tilts with the mouse, floats, pauses with the Motion button). **Your photo is `public/photo.jpg`**, cropped and given natural colours with navy-tinted shadows by `tools/duotone.py` (`python tools/duotone.py original.jpg public/photo.jpg`, add `--blue` for the full blue look; needs Pillow). If the file is missing, the JN monogram is shown instead. Card numbers live in `cardStats` in `app.ts`.
 - `src/app/three-scene.ts` / `orbital-scene.ts`: the earlier Three.js sculpture, no longer used on the page (kept in case you want it back).
 - `src/app/app.ts`: language, filtering, dialog focus, clipboard, contact links.
 - `public/Jasser_Noomani_CV_Fr.pdf`: the downloadable CV. Replace this file to update it everywhere.

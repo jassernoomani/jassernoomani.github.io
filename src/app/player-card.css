@@ -69,10 +69,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 20%;
-  /* blue duotone: greyscale photo multiplied onto the cyan→blue gradient */
-  filter: grayscale(1) contrast(1.2) brightness(1.1);
-  mix-blend-mode: multiply;
+  object-position: 50% 0%;
+  /* photo.jpg is pre-toned with tools/duotone.py, so no extra filter here */
 }
 .photo img.mono {
   width: 56%;
