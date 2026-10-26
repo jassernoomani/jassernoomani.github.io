@@ -43,7 +43,12 @@ describe('App', () => {
       'a[download]',
     ) as NodeListOf<HTMLAnchorElement>;
     expect(cvLinks.length).toBeGreaterThan(0);
+    cvLinks.forEach((a) => expect(a.getAttribute('href')).toBe('Jasser_Noomani_CV_En.pdf'));
+    fixture.componentInstance.setLanguage('fr');
+    fixture.detectChanges();
     cvLinks.forEach((a) => expect(a.getAttribute('href')).toBe('Jasser_Noomani_CV_Fr.pdf'));
+    fixture.componentInstance.setLanguage('en');
+    fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('a[href^="mailto:"]').getAttribute('href')).toBe(
       'mailto:Jasser.NOOMANI@esprit.tn',
     );

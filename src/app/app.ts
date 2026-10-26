@@ -38,7 +38,10 @@ export class App implements AfterViewInit, OnDestroy {
   readonly email = 'Jasser.NOOMANI@esprit.tn';
   readonly github = 'https://github.com/jassernoomani';
   readonly linkedin = 'https://www.linkedin.com/in/jasser-noomani';
-  readonly cv = 'Jasser_Noomani_CV_Fr.pdf';
+  /** CV file that matches the selected language. */
+  get cv() {
+    return this.lang() === 'fr' ? 'Jasser_Noomani_CV_Fr.pdf' : 'Jasser_Noomani_CV_En.pdf';
+  }
   readonly year = new Date().getFullYear();
   readonly total = PROJECTS.length.toString().padStart(2, '0');
   readonly visibleProjects = computed(() =>
