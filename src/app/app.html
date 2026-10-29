@@ -195,6 +195,20 @@
                   <span class="demo-chip"><app-icon name="play" />{{ t('WATCH THE DEMO') }} · 1:15</span>
                 </div>
               }
+              @case ('winou') {
+                <div class="art nova-art winou-art" aria-hidden="true">
+                  <div class="phones">
+                    <span class="phone phone-back"><img src="projects/winou/05_map.webp" alt="" loading="lazy" /></span>
+                    <span class="phone phone-front"><img src="projects/winou/03_match.webp" alt="" loading="lazy" /></span>
+                  </div>
+                  <div class="nova-side">
+                    <strong>wi<span>nou</span></strong>
+                    <p>{{ t('FIND THEM. BRING THEM HOME.') }}</p>
+                    <p class="nova-note">YOLO · DINOv2 · QDRANT</p>
+                    <span class="badge"><app-icon name="check" />84% · {{ t('AI MATCH') }}</span>
+                  </div>
+                </div>
+              }
               @case ('nova') {
                 <div class="art nova-art" aria-hidden="true">
                   <div class="phones">
@@ -611,9 +625,10 @@
         <p class="gallery-note">
           {{
             t(
-              project.frame === 'browser'
+              project.galleryNote ??
+              (project.frame === 'browser'
                 ? 'Screenshots from the local demo environment.'
-                : 'Real screenshots from the 43-step end-to-end test on an Android phone.'
+                : 'Real screenshots from the 43-step end-to-end test on an Android phone.')
             )
           }}
         </p>

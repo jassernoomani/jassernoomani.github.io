@@ -23,17 +23,17 @@ describe('App', () => {
       );
     filters[2].click(); // Mobile
     await fixture.whenStable();
-    expect(names()).toEqual(['Nova Paris']);
+    expect(names()).toEqual(['Winou', 'Nova Paris']);
     filters[3].click(); // Applied AI
     await fixture.whenStable();
-    expect(names()).toEqual(['e-Biessa', 'Nirvana', 'Polars & Qdrant']);
+    expect(names()).toEqual(['e-Biessa', 'Winou', 'Nirvana', 'Polars & Qdrant']);
     filters[1].click(); // Full-stack
     await fixture.whenStable();
-    expect(names()).toHaveLength(4);
-    expect(fixture.nativeElement.querySelector('.work-count').textContent).toContain('04 / 06');
+    expect(names()).toHaveLength(5);
+    expect(fixture.nativeElement.querySelector('.work-count').textContent).toContain('05 / 07');
     filters[0].click();
     await fixture.whenStable();
-    expect(names()).toHaveLength(6);
+    expect(names()).toHaveLength(7);
   });
 
   it('offers the CV as a download and uses the current contact details', async () => {

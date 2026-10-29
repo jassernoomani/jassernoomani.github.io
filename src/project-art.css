@@ -107,6 +107,32 @@
   box-shadow: 5px 5px 0 var(--blue);
 }
 
+/* Winou */
+.visual-winou {
+  background:
+    radial-gradient(circle at 30% 45%, #3fd8ff55, transparent 55%),
+    radial-gradient(circle at 85% 20%, #1452ff66, transparent 50%),
+    linear-gradient(200deg, #0a2690, #020b2e);
+}
+@media (min-width: 900px) {
+  .size-featured .winou-art {
+    gap: 56px;
+  }
+  .size-featured .winou-art .phones {
+    width: 250px;
+    height: 312px;
+  }
+  .size-featured .winou-art .phone {
+    width: 142px;
+  }
+  .size-featured .winou-art .phone-front {
+    left: 100px;
+  }
+  .size-featured .winou-art .nova-side strong {
+    font-size: 76px;
+  }
+}
+
 /* Nova Paris */
 .visual-nova {
   background:

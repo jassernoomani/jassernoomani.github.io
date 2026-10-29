@@ -1,59 +1,53 @@
-# ViteProject
+# Jasser Noomani — Portfolio
 
-This project was created using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+My personal portfolio: **[jassernoomani.github.io](https://jassernoomani.github.io)**
 
-## Development server
+A single-page site in English and French that presents my projects, experience and CV. The design is inspired by Persona 3 Reload, in a dark-blue "Midnight Tide" palette.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+- **Hero player card** with my photo, key stats and a tilt effect
+- **Project grid** with filters (Full-stack, Mobile, Applied AI, Data & DevOps)
+- **Project details** with demo videos, screenshot galleries and a full-screen carousel with zoom and swipe
+- **About panel** with a live Tunis clock
+- **English / French** switch, remembered between visits
+- **CV download** in the selected language (`Jasser_Noomani_CV_En.pdf` / `Jasser_Noomani_CV_Fr.pdf`)
+- Responsive layout, keyboard navigation and reduced-motion support
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tech stack
 
-## Code scaffolding
+- **Angular 21**: standalone components, signals, new control flow
+- **Vitest** unit tests (`ng test`)
+- Self-hosted fonts (Anton, Barlow, Barlow Condensed) via `@fontsource`
+- **GitHub Actions** builds the site and deploys it to **GitHub Pages** on every push to `main`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Run locally
 
 ```bash
-ng build
+npm install
+npm start         # http://localhost:4200
+npm test          # unit tests
+npm run build     # production build in dist/
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project structure
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```text
+src/app/
+  app.ts / app.html / app.css    page layout, filters, dialogs, carousel
+  portfolio.data.ts              projects, experience, education, translations
+  player-card.*                  hero card
+  brand-panel.*                  About panel (JN emblem + clock)
+  icon.ts                        SVG icon component
+public/
+  projects/                      screenshots and demo videos
+  icons/sprite.svg               icon sprite
+  Jasser_Noomani_CV_*.pdf        CVs
 ```
 
-## Running end-to-end tests
+To add or edit a project, update `src/app/portfolio.data.ts` and put its images in `public/projects/<name>/`.
+More details are in [PORTFOLIO.md](PORTFOLIO.md).
 
-For end-to-end (e2e) testing, run:
+## Contact
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[Jasser.NOOMANI@esprit.tn](mailto:Jasser.NOOMANI@esprit.tn) · [LinkedIn](https://www.linkedin.com/in/jasser-noomani)

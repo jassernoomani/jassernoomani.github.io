@@ -20,6 +20,8 @@ export interface Project {
   contributions: string[];
   scope: string;
   gallery?: Shot[];
+  /** Line under the gallery title; defaults depend on the frame. */
+  galleryNote?: string;
   /** How screenshots are framed: phone (portrait) or browser (16:9). Defaults to phone. */
   frame?: 'phone' | 'browser';
   video?: { src: string; poster: string; length: string; note: string };
@@ -241,6 +243,8 @@ const l = (en: string, fr: string) => {
     'Élève ingénieur en informatique à Tunis. Full-stack, mobile et IA appliquée. Découvrez e-Biessa, Nova Paris, Nirvana et plus encore.',
   ],
   ['Engineering what’s next.', 'Imaginer. Créer demain.'],
+  ['FIND THEM. BRING THEM HOME.', 'LES RETROUVER. LES RAMENER.'],
+  ['AI MATCH', 'CORRESPONDANCE IA'],
 ].forEach(([en, fr]) => (TRANSLATIONS[en] = fr));
 
 /* ------------------------------------------------------------------ */
@@ -314,8 +318,73 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    id: 'nova',
+    id: 'winou',
     number: '02',
+    name: 'Winou',
+    year: '2026',
+    size: 'featured',
+    context: l('Personal project · Mobile + AI', 'Projet personnel · Mobile + IA'),
+    subtitle: l('Every lost pet has a way home.', 'Chaque animal perdu a un chemin vers la maison.'),
+    type: l('LOST-PET MATCHER · STRAY MAP', 'ANIMAUX PERDUS · CARTE DES ERRANTS'),
+    description: l(
+      'A Flutter app and Spring Boot backend that match photos of loose animals against nearby lost-pet reports with computer vision, plus a community map of street animals in Tunis.',
+      'Une application Flutter et un backend Spring Boot qui comparent les photos d’animaux errants aux avis de perte proches grâce à la vision par ordinateur, avec une carte communautaire des animaux des rues à Tunis.',
+    ),
+    categories: ['Mobile', 'Applied AI', 'Full-stack'],
+    tags: ['Flutter', 'Spring Boot', 'FastAPI', 'YOLO', 'DINOv2', 'Qdrant', 'PostGIS', 'Firebase'],
+    highlights: [
+      { value: '87%', label: l('of dogs ranked #1 among 200 nearby reports', 'des chiens classés n°1 parmi 200 avis proches') },
+      { value: '3', label: l('services: app, API + worker, ML', 'services : app, API + worker, ML') },
+      { value: '300 m', label: l('position fuzzing to protect owners', 'de flou sur la position des propriétaires') },
+    ],
+    challenge: l(
+      'Someone who finds a loose cat rarely knows who lost it. The app has to recognise an individual animal from a street photo, only compare it with reports nearby and recent, never claim certainty, and keep owners’ addresses private.',
+      'Celui qui trouve un chat errant sait rarement à qui il appartient. L’application doit reconnaître un animal précis sur une photo prise dans la rue, ne le comparer qu’aux avis proches et récents, ne jamais affirmer une certitude et protéger l’adresse des propriétaires.',
+    ),
+    contributions: [
+      l(
+        'Validated the idea first: benchmarked CLIP and DINOv2 on DogFaceNet, PetFinder and Oxford-IIIT Pet, then chose DINOv2 with YOLO crops and per-species thresholds (~1% false positives per photo pair).',
+        'Validation de l’idée d’abord : comparaison de CLIP et DINOv2 sur DogFaceNet, PetFinder et Oxford-IIIT Pet, puis choix de DINOv2 avec recadrage YOLO et seuils par espèce (~1 % de faux positifs par paire de photos).',
+      ),
+      l(
+        'Built the matching pipeline: a FastAPI service detects, crops and embeds each photo; a Spring Boot worker indexes it in Qdrant and searches within 10 km and a time window, then sends a push notification for each likely match.',
+        'Pipeline de correspondance : un service FastAPI détecte, recadre et vectorise chaque photo ; un worker Spring Boot l’indexe dans Qdrant, cherche dans un rayon de 10 km et une fenêtre de temps, puis envoie une notification push pour chaque correspondance probable.',
+      ),
+      l(
+        'Designed the Spring Boot API on PostgreSQL + PostGIS and MinIO: JWT auth, lost reports, sightings, matches, owner–finder chat, association badges and alerts, moderation, rate limiting, EXIF-free images and fuzzed positions.',
+        'API Spring Boot sur PostgreSQL + PostGIS et MinIO : authentification JWT, avis de perte, signalements, correspondances, messagerie propriétaire–découvreur, badges et alertes pour les associations, modération, limitation de débit, images sans EXIF et positions floutées.',
+      ),
+      l(
+        'Built the Flutter app (Riverpod, go_router, OpenStreetMap, EN/FR, light and dark) from my own Figma designs, with a camera-first sighting flow; tested with Testcontainers, pytest and 70 screen renders checked against the designs.',
+        'Application Flutter (Riverpod, go_router, OpenStreetMap, EN/FR, thèmes clair et sombre) réalisée à partir de mes maquettes Figma, avec un parcours de signalement centré sur l’appareil photo ; testée avec Testcontainers, pytest et 70 rendus d’écrans comparés aux maquettes.',
+      ),
+    ],
+    scope: l(
+      'Personal project · designed and built solo · 2026',
+      'Projet personnel · conçu et réalisé seul · 2026',
+    ),
+    galleryNote: l(
+      'Screens from my phone and from the app’s screen tests with sample data, in light and dark.',
+      'Captures de mon téléphone et des tests d’écrans de l’application avec des données d’exemple, en clair et en sombre.',
+    ),
+    gallery: [
+      { src: 'projects/winou/01_home.webp', caption: l('Home: missing pets near you', 'Accueil : animaux perdus près de chez vous') },
+      { src: 'projects/winou/02_sighting.webp', caption: l('I saw an animal: camera-first sighting', 'J’ai vu un animal : signalement par photo') },
+      { src: 'projects/winou/03_match.webp', caption: l('Possible match: 84% visual similarity', 'Correspondance possible : 84 % de similarité') },
+      { src: 'projects/winou/04_lost_detail.webp', caption: l('Lost report with an approximate area', 'Avis de perte avec zone approximative') },
+      { src: 'projects/winou/05_map.webp', caption: l('Map: lost pets, sightings, strays, injured', 'Carte : perdus, signalés, errants, blessés') },
+      { src: 'projects/winou/06_map_filters.webp', caption: l('Map filters', 'Filtres de la carte') },
+      { src: 'projects/winou/07_stray.webp', caption: l('Injured stray: what became of it?', 'Errant blessé : qu’est-il devenu ?') },
+      { src: 'projects/winou/08_chat.webp', caption: l('Owner and finder chat', 'Messagerie propriétaire–découvreur') },
+      { src: 'projects/winou/09_activity.webp', caption: l('My activity: matches', 'Mon activité : correspondances') },
+      { src: 'projects/winou/10_admin.webp', caption: l('Admin: association requests', 'Admin : demandes d’associations') },
+      { src: 'projects/winou/11_home_dark.webp', caption: l('Dark theme', 'Thème sombre') },
+      { src: 'projects/winou/12_match_dark.webp', caption: l('Match screen, dark theme', 'Correspondance, thème sombre') },
+    ],
+  },
+  {
+    id: 'nova',
+    number: '03',
     name: 'Nova Paris',
     year: '2026',
     size: 'major',
@@ -374,7 +443,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'nirvana',
-    number: '03',
+    number: '04',
     name: 'Nirvana',
     year: '2026',
     size: 'major',
@@ -441,7 +510,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'aletheia',
-    number: '04',
+    number: '05',
     name: 'Aletheia',
     year: '2025–26',
     size: 'minor',
@@ -477,7 +546,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'polars',
-    number: '05',
+    number: '06',
     name: 'Polars & Qdrant',
     year: '2024',
     size: 'minor',
@@ -516,7 +585,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'bledismart',
-    number: '06',
+    number: '07',
     name: 'BlediSmart',
     year: '2024',
     size: 'minor',

@@ -52,7 +52,7 @@ export class App implements AfterViewInit, OnDestroy {
   readonly cardStats = computed<CardStat[]>(() => {
     this.lang();
     return [
-      { label: this.t('Projects'), value: '06', fill: 60 },
+      { label: this.t('Projects'), value: '07', fill: 70 },
       { label: this.t('Internships'), value: '02', fill: 40 },
       { label: this.t('Auto tests'), value: '240+', fill: 92 },
       { label: this.t('Languages'), value: '03', fill: 55 },
