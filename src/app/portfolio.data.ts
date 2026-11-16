@@ -245,6 +245,7 @@ const l = (en: string, fr: string) => {
   ['Engineering what’s next.', 'Imaginer. Créer demain.'],
   ['FIND THEM. BRING THEM HOME.', 'LES RETROUVER. LES RAMENER.'],
   ['AI MATCH', 'CORRESPONDANCE IA'],
+  ['LIVE SYNC BETWEEN PHONES', 'SYNCHRO EN DIRECT ENTRE TÉLÉPHONES'],
 ].forEach(([en, fr]) => (TRANSLATIONS[en] = fr));
 
 /* ------------------------------------------------------------------ */
@@ -388,45 +389,45 @@ export const PROJECTS: Project[] = [
     name: 'Nova Paris',
     year: '2026',
     size: 'major',
-    context: l('Mobile app · ESPRIT', 'Application mobile · ESPRIT'),
+    context: l('Mobile app · ESPRIT · team of 5', 'Application mobile · ESPRIT · équipe de 5'),
     subtitle: l('Every room, ready on time.', 'Chaque chambre, prête à l’heure.'),
     type: l('HOTEL OPERATIONS · FLUTTER', 'GESTION HÔTELIÈRE · FLUTTER'),
     description: l(
-      'A Flutter hotel-management app. I built the rooms & housekeeping module and the shared foundation the rest of the app runs on.',
-      'Une application Flutter de gestion hôtelière. J’ai développé le module chambres & ménage et le socle sur lequel repose le reste de l’application.',
+      'A Flutter hotel-management app built by a team of five, one module each. I built the rooms & housekeeping module, the shared app skeleton and live sync between the hotel’s phones, and integrated the team’s modules into one app.',
+      'Une application Flutter de gestion hôtelière réalisée par une équipe de cinq, un module chacun. J’ai développé le module chambres & ménage, le socle commun de l’application et la synchronisation en direct entre les téléphones de l’hôtel, et intégré les modules de l’équipe dans une seule application.',
     ),
     categories: ['Mobile'],
-    tags: ['Flutter', 'Dart', 'sqflite', 'Android', 'integration_test'],
+    tags: ['Flutter', 'Dart', 'sqflite', 'Dart shelf', 'Offline-first sync', 'Android', 'integration_test'],
     highlights: [
-      { value: '20', label: l('features in the module', 'fonctionnalités dans le module') },
-      { value: '155', label: l('unit, widget & golden tests', 'tests unitaires, widget & golden') },
+      { value: '35', label: l('screens in my module (~24,600 lines of Dart)', 'écrans dans mon module (~24 600 lignes de Dart)') },
+      { value: '230', label: l('automated tests, 0 analyzer issues', 'tests automatisés, 0 alerte d’analyse') },
       { value: '43/43', label: l('E2E steps passed on a real phone', 'étapes E2E réussies sur téléphone réel') },
     ],
     challenge: l(
-      'Housekeeping changes minute by minute: rooms free up, agents get reassigned, problems are reported from the corridor. The app has to stay correct offline, keep data safe across updates, and show changes live.',
-      'Le ménage évolue minute par minute : chambres libérées, agents réaffectés, incidents signalés depuis le couloir. L’application doit rester correcte hors ligne, préserver les données à chaque mise à jour et afficher les changements en direct.',
+      'Housekeeping changes minute by minute: rooms free up, agents get reassigned, problems are reported from the corridor. Several phones must see the same rooms live, keep working when the Wi-Fi drops, and never lose or double an action.',
+      'Le ménage évolue minute par minute : chambres libérées, agents réaffectés, incidents signalés depuis le couloir. Plusieurs téléphones doivent voir les mêmes chambres en direct, continuer à fonctionner quand le Wi-Fi coupe, sans jamais perdre ni doubler une action.',
     ),
     contributions: [
       l(
-        'Built 20 features (~20,500 lines of Dart): automatic assignment by floor and priority, scored inspections, cleaning timers, incident reports with photos and voice notes, stock, laundry, minibar and a live dashboard.',
-        '20 fonctionnalités (~20 500 lignes de Dart) : affectation automatique par étage et priorité, inspections notées, chronomètres de nettoyage, incidents avec photos et notes vocales, stocks, blanchisserie, minibar et tableau de bord en direct.',
+        'Built the rooms & housekeeping module (35 screens, ~24,600 lines of Dart): automatic assignment by floor and priority, scored inspections, cleaning timers, problem reports with photos and voice notes, lost & found, stock, laundry, minibar, QR codes per room and a live dashboard.',
+        'Développement du module chambres & ménage (35 écrans, ~24 600 lignes de Dart) : affectation automatique par étage et priorité, inspections notées, chronomètres de nettoyage, incidents avec photos et notes vocales, objets trouvés, stocks, blanchisserie, minibar, QR codes par chambre et tableau de bord en direct.',
       ),
       l(
-        'Designed the app foundation: modules that communicate only through events, one SQLite database with 7 schema versions migrated in place, and every action run in a transaction with role, ownership and version checks.',
-        'Conception du socle : modules communiquant uniquement par événements, une base SQLite avec 7 versions de schéma migrées sans perte, et chaque action exécutée dans une transaction avec contrôles de rôle, de propriété et de version.',
+        'Added live sync between phones: a small Dart (shelf) server keeps a numbered log of actions; each phone sends its own and replays the others, with version checks that resolve conflicts on their own. The app finds the hotel server on the Wi-Fi, scans the network when the router drops broadcasts, and follows the server when its address changes.',
+        'Synchronisation en direct entre téléphones : un petit serveur Dart (shelf) tient un journal numéroté des actions ; chaque téléphone envoie les siennes et rejoue celles des autres, avec des contrôles de version qui résolvent les conflits seuls. L’application trouve le serveur de l’hôtel sur le Wi-Fi, parcourt le réseau quand la box bloque les annonces, et suit le serveur quand son adresse change.',
       ),
       l(
-        'Made actions idempotent with client UUIDs, scheduled Android alerts that fire with the app closed, and added backup and restore for the module’s data, photos and voice notes.',
-        'Actions idempotentes grâce aux UUID clients, alertes Android planifiées qui se déclenchent application fermée, et sauvegarde/restauration des données, photos et notes vocales du module.',
+        'Designed the shared foundation and integrated the team’s modules: one folder per module, modules that talk only through events, one SQLite database migrated in place, and every write going through one path with role, ownership and version checks and client UUIDs so it is safe to repeat.',
+        'Conception du socle commun et intégration des modules de l’équipe : un dossier par module, des modules qui communiquent uniquement par événements, une base SQLite migrée sans perte, et chaque écriture passant par un seul chemin avec contrôles de rôle, de propriété et de version et des UUID clients pour pouvoir la rejouer sans risque.',
       ),
       l(
-        'Wrote 155 automated tests on a real SQLite database and a 43-step end-to-end test on an Android 14 phone with screenshots and an HTML report — 43/43 passed.',
-        'Écriture de 155 tests automatisés sur une vraie base SQLite et d’un test de bout en bout de 43 étapes sur téléphone Android 14, avec captures et rapport HTML — 43/43 réussies.',
+        'Wrote 230 automated tests (rules on a real SQLite database, widget and golden tests) plus tests for the sync server, and a 43-step end-to-end test on an Android 14 phone with screenshots and an HTML report — 43/43 passed.',
+        'Écriture de 230 tests automatisés (règles sur une vraie base SQLite, tests widget et golden) et de tests pour le serveur de synchronisation, ainsi que d’un test de bout en bout de 43 étapes sur téléphone Android 14, avec captures et rapport HTML — 43/43 réussies.',
       ),
     ],
     scope: l(
-      'Mobile development course project · ESPRIT · 2026',
-      'Projet du module Développement mobile · ESPRIT · 2026',
+      'Mobile development course project · team of 5 · ESPRIT · 2026',
+      'Projet du module Développement mobile · équipe de 5 · ESPRIT · 2026',
     ),
 
     gallery: [
